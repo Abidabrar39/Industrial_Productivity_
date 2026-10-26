@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>জরিপ প্রশ্নমালা / Survey Questionnaire</title>
 <style>
-:root{--ink:#111;--paper:#fff;--line:#222;--soft:#f2f2f2;--warn:#8a1c1c}
+:root{--ink:#000;--paper:#fff;--line:#7f7f7f;--soft:#f2f2f2;--warn:#8a1c1c;--navy:#1F3864;--blue:#D9E2F3;--grey:#595959}
 *{box-sizing:border-box}
-body{margin:0;background:#e9e9e9;color:var(--ink);font:16px/1.55 "Noto Sans Bengali","Nirmala UI","Kalpurush",Arial,sans-serif}
-form,.msg{max-width:860px;margin:16px auto;background:var(--paper);padding:28px 26px;border:1px solid #ccc}
-h1{font-size:1.25rem;text-align:center;margin:0}
-h1 small{display:block;font-weight:600;font-size:1.05rem}
-h2{font-size:1.05rem;margin:28px 0 4px;padding:6px 10px;background:var(--soft);border-left:4px solid var(--line)}
-h2 small,h3 small{display:block;font-weight:400}
-h3{font-size:1rem;margin:18px 0 4px}
-.en{display:block;font-size:.92em;color:#333}
+body{margin:0;background:#e9e9e9;color:var(--ink);font:15px/1.5 "Nirmala UI","Noto Sans Bengali","Kalpurush",Calibri,Arial,sans-serif}
+form,.msg{max-width:794px;margin:16px auto;background:var(--paper);padding:40px 44px;border:1px solid #ccc}
+h1{font-size:1.3rem;font-weight:500;text-align:center;margin:0}
+h1 small{display:block;font-weight:700;font-size:1.05rem}
+h2{font-size:1.05rem;font-weight:400;color:var(--navy);margin:26px 0 8px;padding:0 0 3px;border-bottom:1px solid var(--ink)}
+h2 small{display:block;font-weight:700;color:var(--navy)}h3 small{display:block;font-weight:400;font-style:italic;color:var(--grey)}
+h3{font-size:1rem;font-weight:400;color:var(--navy);margin:18px 0 4px}
+.en{display:block;font-size:.9em;font-style:italic;color:var(--grey)}
 .q{margin:16px 0 6px;font-weight:600}
 .q .en{font-weight:400}
-.box{border:1.5px solid var(--line);padding:10px 12px;margin:14px 0}
-.box legend{font-weight:600;padding:0 6px}
+.box{border:0;background:var(--soft);padding:8px 12px;margin:14px 0}
+.box legend{font-weight:700;font-style:italic;padding:0 6px;background:var(--paper)}
 .opts label{display:inline-flex;align-items:center;gap:6px;margin:4px 16px 4px 0;cursor:pointer}
-input[type=radio]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:2px;margin:0;display:inline-grid;place-content:center;background:#fff;flex:none;cursor:pointer}
-input[type=radio]:checked::after{content:"✓";font-size:16px;line-height:1;font-weight:700}
+input[type=radio]{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1px solid var(--ink);border-radius:0;margin:0;display:inline-grid;place-content:center;background:#fff;flex:none;cursor:pointer}
+input[type=radio]:checked::after{content:"✓";font-size:14px;line-height:1;font-weight:700}
 input[type=radio]:focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
 input[type=radio]:disabled{background:var(--soft);cursor:default}
 input[type=text],input[type=number]{font:inherit;border:0;border-bottom:1.5px solid var(--line);padding:4px 2px;background:transparent;min-width:0}
@@ -29,20 +29,20 @@ input[type=text].w,input[type=number].w{width:100%;max-width:340px}
 .code{letter-spacing:.35em;font-size:1.2rem;width:9em!important;text-transform:uppercase}
 .tw{overflow-x:auto;margin:8px 0}
 table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:middle}
-th{background:var(--soft);font-weight:600;font-size:.88rem;text-align:center}
+th,td{border:1px solid var(--line);padding:5px 7px;vertical-align:middle}
+th{background:var(--blue);color:var(--grey);font-weight:400;font-size:.75rem;text-align:center}th:first-child{color:var(--ink);font-weight:700;font-size:.95rem}
 th:first-child,td:first-child{text-align:left}
 td:not(:first-child){text-align:center}
 .scale label{margin-right:12px}
-.help{border:2px solid var(--line);padding:12px 14px;margin:26px 0 10px;background:var(--soft)}
+.help{border:1px solid var(--line);padding:10px 14px;margin:26px 0 10px;background:var(--soft)}
 .help b{display:block}
 .err{color:var(--warn);font-weight:600;margin:8px 0}
-button{font:inherit;font-weight:700;padding:12px 28px;background:var(--ink);color:#fff;border:0;cursor:pointer;margin-top:12px}
+button{font:inherit;font-weight:700;padding:12px 28px;background:var(--navy);color:#fff;border:0;cursor:pointer;margin-top:12px}
 button:disabled{opacity:.5}
 .msg h2{margin-top:0}
 .hide{display:none}
 @media print{body{background:#fff}form{border:0}button{display:none}}
-@media(max-width:560px){form,.msg{margin:0;padding:18px 14px;border:0}}
+@media(max-width:600px){form,.msg{margin:0;padding:18px 14px;border:0}}
 </style>
 </head>
 <body>
@@ -120,6 +120,7 @@ button:disabled{opacity:.5}
 <script>
 // ====== SETTINGS: paste your Google Apps Script Web App URL here ======
 var ENDPOINT = https://script.google.com/macros/s/AKfycbxI-DteUA8aGtguxYMAnC39zFoZlSwS99ZoO2lKgJ6jhDG2E80drTuVB8co9AyJG5X4/exec;
+// =====================================================================
 // =====================================================================
 var HELP = '<div class="help"><b>সহায়তা প্রয়োজন হলে</b>কান পেতে রই: ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা – রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।<span class="en">Kaan Pete Roi: 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>';
 var YN = [["yes","হ্যাঁ / Yes"],["no","না / No"]];
