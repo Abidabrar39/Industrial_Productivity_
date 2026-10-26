@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জরিপ প্রশ্নমালা / Survey Questionnaire</title>
+<style>
+:root{--ink:#111;--paper:#fff;--line:#222;--soft:#f2f2f2;--warn:#8a1c1c}
+*{box-sizing:border-box}
+body{margin:0;background:#e9e9e9;color:var(--ink);font:16px/1.55 "Noto Sans Bengali","Nirmala UI","Kalpurush",Arial,sans-serif}
+form,.msg{max-width:860px;margin:16px auto;background:var(--paper);padding:28px 26px;border:1px solid #ccc}
+h1{font-size:1.25rem;text-align:center;margin:0}
+h1 small{display:block;font-weight:600;font-size:1.05rem}
+h2{font-size:1.05rem;margin:28px 0 4px;padding:6px 10px;background:var(--soft);border-left:4px solid var(--line)}
+h2 small,h3 small{display:block;font-weight:400}
+h3{font-size:1rem;margin:18px 0 4px}
+.en{display:block;font-size:.92em;color:#333}
+.q{margin:16px 0 6px;font-weight:600}
+.q .en{font-weight:400}
+.box{border:1.5px solid var(--line);padding:10px 12px;margin:14px 0}
+.box legend{font-weight:600;padding:0 6px}
+.opts label{display:inline-flex;align-items:center;gap:6px;margin:4px 16px 4px 0;cursor:pointer}
+input[type=radio]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:2px;margin:0;display:inline-grid;place-content:center;background:#fff;flex:none;cursor:pointer}
+input[type=radio]:checked::after{content:"✓";font-size:16px;line-height:1;font-weight:700}
+input[type=radio]:focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
+input[type=radio]:disabled{background:var(--soft);cursor:default}
+input[type=text],input[type=number]{font:inherit;border:0;border-bottom:1.5px solid var(--line);padding:4px 2px;background:transparent;min-width:0}
+input[type=text].w,input[type=number].w{width:100%;max-width:340px}
+.code{letter-spacing:.35em;font-size:1.2rem;width:9em!important;text-transform:uppercase}
+.tw{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:middle}
+th{background:var(--soft);font-weight:600;font-size:.88rem;text-align:center}
+th:first-child,td:first-child{text-align:left}
+td:not(:first-child){text-align:center}
+.scale label{margin-right:12px}
+.help{border:2px solid var(--line);padding:12px 14px;margin:26px 0 10px;background:var(--soft)}
+.help b{display:block}
+.err{color:var(--warn);font-weight:600;margin:8px 0}
+button{font:inherit;font-weight:700;padding:12px 28px;background:var(--ink);color:#fff;border:0;cursor:pointer;margin-top:12px}
+button:disabled{opacity:.5}
+.msg h2{margin-top:0}
+.hide{display:none}
+@media print{body{background:#fff}form{border:0}button{display:none}}
+@media(max-width:560px){form,.msg{margin:0;padding:18px 14px;border:0}}
+</style>
+</head>
+<body>
+<form id="f" novalidate>
+<h1>কর্মজীবী শিল্পশ্রমিকদের ঘুম, স্বাস্থ্য ও কর্মক্ষমতা বিষয়ক জরিপ প্রশ্নমালা<small>Survey Questionnaire: Sleep, Health &amp; Work Performance among Industrial Workers</small></h1>
+<p style="margin-top:14px">নির্দেশনা: অনুগ্রহ করে প্রযোজ্য উত্তরে টিক (✓) চিহ্ন প্রদান করুন অথবা নির্ধারিত স্থানে উত্তর লিপিবদ্ধ করুন। আপনার প্রদত্ত সকল তথ্য কঠোরভাবে গোপন রাখা হবে, কেবল গবেষণার উদ্দেশ্যে ব্যবহৃত হবে এবং কোনো তৃতীয় পক্ষের নিকট প্রকাশ বা তাদের প্রবেশাধিকার প্রদান করা হবে না।
+<span class="en">Please tick (✓) the applicable answer or write in the space provided. Your information will be kept strictly confidential.</span></p>
+
+<fieldset class="box"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
+<div class="opts"><b>জরিপের ধাপ / Wave:</b> <span id="wave"></span></div>
+<div style="margin-top:8px"><b>তারিখ / Date:</b> <input type="text" id="date" name="date" readonly style="width:9em"> <span class="en" style="display:inline">(DD/MM/YYYY)</span>
+&nbsp; <b>কারখানার কোড / Factory code:</b> <input type="text" id="factory" name="factory" style="width:7em"></div></fieldset>
+
+<h2>যোগ্যতা যাচাই<small>Eligibility</small></h2>
+<div id="elig"></div>
+<div id="rest">
+
+<h2>অংশগ্রহণকারী কোড ও পরবর্তী জরিপে সম্মতি<small>Participant Linkage Code &amp; Follow-up Consent</small></h2>
+<div class="q">খ. আপনার ব্যক্তিগত কোড তৈরি করুন: মায়ের নামের প্রথম অক্ষর (ইংরেজিতে) + আপনার জন্মমাস (২ অঙ্ক) + জন্মসালের শেষ ২ অঙ্ক।<span class="en">B. Create your personal code: first letter of your mother's first name (English) + your birth month (2 digits) + last 2 digits of your birth year.</span></div>
+<div>কোড / Code: <input type="text" class="code" name="code" id="code" maxlength="5" autocomplete="off" inputmode="latin" placeholder="R0391"> (উদাহরণ / e.g., R0391)</div>
+<div id="consent"></div>
+
+<h2>সেকশন ১: পরিচিতি ও কাজের ধরন<small>Section 1 — Background &amp; Work</small></h2>
+<div class="q">১. আপনার বর্তমান বয়স কত?<span class="en">What is your current age?</span></div>
+<div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q1_age" min="14" max="90" inputmode="numeric"> বছর</div>
+<div class="q">২. আপনার লিঙ্গ পরিচয় কী?<span class="en">What is your gender identity?</span></div>
+<div>উত্তর: <input type="text" class="w" name="q2_gender"></div>
+<div class="q">৩. আপনার প্রতিষ্ঠান কোন খাতের?<span class="en">Which sector is your workplace in?</span></div>
+<div id="q3" class="opts"></div>
+<div class="q">৪. আপনার সেকশন, লাইন বা দলের নাম কী? (গবেষক এটি থেকে দলের কোড নির্ধারণ করবেন)<span class="en">What is the name of your section / line / team? (the researcher assigns the team code from this)</span></div>
+<div>সেকশন/লাইন/দল: <input type="text" class="w" name="q4_team"></div>
+<div class="q">৫. আপনার কাজের শিফটের ধরন কী?<span class="en">What is your shift pattern?</span></div>
+<div id="q5" class="opts"></div>
+
+<h2>সেকশন ২: কাজের চাপ, নিয়ন্ত্রণ ও স্বয়ংক্রিয়তা<small>Section 2 — Job Demands, Control &amp; Automation</small></h2>
+<p>গত ৬ মাসের অভিজ্ঞতা অনুযায়ী প্রতিটি বক্তব্যের সাথে আপনি কতটা একমত?<span class="en">Thinking of the past 6 months, how much do you agree with each statement?</span></p>
+<h3>৬. কাজের চাপ, সময়ের নিয়ন্ত্রণ ও আবেগজনিত শ্রম<small>Job demands, work time control &amp; emotional labor</small></h3>
+<div id="g6" class="tw"></div>
+<h3>৭. স্বয়ংক্রিয়তা ও ডিজিটাল ব্যবস্থাপনা<small>Automation &amp; algorithmic management</small></h3>
+<div id="g7" class="tw"></div>
+
+<h2>সেকশন ৩: ঘুম ও স্বাস্থ্য<small>Section 3 — Sleep &amp; Health</small></h2>
+<div class="q">৮. কর্মদিবসগুলোতে আপনি গড়ে প্রতিদিন কত ঘণ্টা ঘুমান?<span class="en">On workdays, how many hours do you sleep on average per day?</span></div>
+<div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q8_sleep_hours" min="0" max="24" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div class="q">৯. গত ৪ সপ্তাহে কাজ করার সময় আপনার কত ঘন ঘন অতিরিক্ত তন্দ্রাচ্ছন্নতা অনুভব হয়েছে বা জেগে থাকতে কষ্ট হয়েছে? (১ = কখনও নয়, ৫ = প্রতিদিন)<span class="en">In the past 4 weeks, how often did you feel excessively drowsy or struggle to stay awake at work? (1 = never, 5 = every day)</span></div>
+<div id="q9" class="opts scale"></div>
+<div class="q">১০. আপনার কি দীর্ঘমেয়াদী কোনো শারীরিক রোগ নির্ণয় করা হয়েছে? (যেমন: উচ্চ রক্তচাপ, ডায়াবেটিস, হৃদরোগ)<span class="en">Have you been diagnosed with a long-term physical illness? (e.g., hypertension, diabetes, heart disease)</span></div>
+<div id="q10" class="opts"></div>
+
+<h2>সেকশন ৪: বিষণ্ণতা, বার্নআউট ও কর্মক্ষমতা<small>Section 4 — Depression, Burnout &amp; Work Productivity</small></h2>
+<h3>১১. বিষণ্ণতা (PHQ-9): গত ২ সপ্তাহে নিচের সমস্যাগুলো আপনাকে কত ঘন ঘন বিরক্ত করেছে?<small>Depression (PHQ-9): Over the last 2 weeks, how often have you been bothered by the following problems?</small></h3>
+<div id="g11" class="tw"></div>
+<h3>১২. বার্নআউট (কোপেনহেগেন বার্নআউট ইনভেন্টরি — ব্যক্তিগত বার্নআউট, ৬টি আইটেম): গত ৬ মাসে<small>Burnout (Copenhagen Burnout Inventory — personal burnout subscale, 6 items): over the past 6 months</small></h3>
+<div id="g12" class="tw"></div>
+<h3>১৩. কর্মক্ষমতা ও কাজের ক্ষতি (WPAI:GH, প্রশ্ন ১–৫, গত ৭ দিন)<small>Work Productivity and Activity Impairment, General Health (WPAI:GH), questions 1–5, past 7 days</small></h3>
+<div class="q">ক. গত ৭ দিনে স্বাস্থ্যসমস্যার কারণে আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন? (অসুস্থতার ছুটি, দেরিতে আসা, আগে চলে যাওয়া সহ)<span class="en">During the past 7 days, how many hours did you miss from work because of health problems?</span></div>
+<div><input type="number" class="w" style="max-width:6em" name="q13a_missed_health" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div class="q">খ. গত ৭ দিনে অন্য কোনো কারণে (যেমন ছুটি, সরকারি ছুটি, এই গবেষণায় অংশ নেওয়া) আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন?<span class="en">During the past 7 days, how many hours did you miss from work for any other reason?</span></div>
+<div><input type="number" class="w" style="max-width:6em" name="q13b_missed_other" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div class="q">গ. গত ৭ দিনে আপনি আসলে কত ঘণ্টা কাজ করেছেন? (০ হলে পরের প্রশ্ন বাদ দিন)<span class="en">During the past 7 days, how many hours did you actually work?</span></div>
+<div><input type="number" class="w" style="max-width:6em" name="q13c_hours_worked" id="q13c" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div class="q" id="q13dq">ঘ. গত ৭ দিনে কাজ করার সময় স্বাস্থ্যসমস্যা আপনার কাজের উৎপাদনশীলতাকে কতটা প্রভাবিত করেছে? (০ = কোনো প্রভাব পড়েনি, ১০ = কাজ করতে সম্পূর্ণ অক্ষম ছিলাম)<span class="en">During the past 7 days, how much did health problems affect your productivity while you were working? (0 = no effect, 10 = completely prevented me from working)</span></div>
+<div id="q13d" class="opts scale"></div>
+
+<div class="help"><b>সহায়তা প্রয়োজন হলে</b>এই প্রশ্নমালার কিছু প্রশ্ন আপনাকে অস্বস্তিতে ফেলতে পারে। আপনি মানসিকভাবে কষ্টে থাকলে বা নিজেকে আঘাত করার চিন্তা আসলে কাউকে জানান। কান পেতে রই (আবেগিক সহায়তা ও আত্মহত্যা প্রতিরোধ হেল্পলাইন): ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা থেকে রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।
+<span class="en">If you feel distressed or have thoughts of harming yourself, please talk to someone. Kaan Pete Roi (emotional support helpline): 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>
+<p>আপনার মূল্যবান সময় ও সহযোগিতার জন্য ধন্যবাদ।<span class="en">Thank you for your valuable time and cooperation.</span></p>
+<div class="err" id="err" role="alert"></div>
+<button type="submit" id="btn">জমা দিন / Submit</button>
+</div>
+</form>
+
+<div class="msg hide" id="done" tabindex="-1"></div>
+
+<script>
+// ====== SETTINGS: paste your Google Apps Script Web App URL here ======
+var ENDPOINT = https://script.google.com/macros/s/AKfycbxI-DteUA8aGtguxYMAnC39zFoZlSwS99ZoO2lKgJ6jhDG2E80drTuVB8co9AyJG5X4/exec;
+// =====================================================================
+var HELP = '<div class="help"><b>সহায়তা প্রয়োজন হলে</b>কান পেতে রই: ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা – রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।<span class="en">Kaan Pete Roi: 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>';
+var YN = [["yes","হ্যাঁ / Yes"],["no","না / No"]];
+var AG = [[1,"সম্পূর্ণ দ্বিমত","Strongly disagree"],[2,"দ্বিমত","Disagree"],[3,"নিরপেক্ষ","Neutral"],[4,"একমত","Agree"],[5,"সম্পূর্ণ একমত","Strongly agree"]];
+var PH = [[0,"একদমই নয়","Not at all"],[1,"বেশ কয়েক দিন","Several days"],[2,"অর্ধেকের বেশি দিন","More than half"],[3,"প্রায় প্রতিদিন","Nearly every day"]];
+var CB = [[100,"সব সময়","Always"],[75,"প্রায়ই","Often"],[50,"মাঝে মাঝে","Sometimes"],[25,"কদাচিৎ","Seldom"],[0,"কখনও নয়","Never / almost never"]];
+var BN = "০১২৩৪৫৬৭৮৯";
+function bn(n){return String(n).replace(/\d/g,function(d){return BN[d]})}
+function rad(name,val,label){return '<label><input type="radio" name="'+name+'" value="'+val+'"> '+label+'</label>'}
+function row(name,opts){return opts.map(function(o){return '<td><input type="radio" name="'+name+'" value="'+o[0]+'" aria-label="'+o[2]+'"></td>'}).join("")}
+function grid(id,pre,head,scale,items){
+  var h='<table><tr><th>প্রশ্ন / Item</th>'+scale.map(function(s){return '<th>'+s[1]+'<br>'+(typeof s[0]=="number"&&scale.length==5&&id!="g12"?s[0]+" ":"")+s[2]+'</th>'}).join("")+'</tr>';
+  items.forEach(function(it,i){h+='<tr><td>'+it[0]+'<span class="en">'+it[1]+'</span></td>'+row(pre+(i+1),scale)+'</tr>'});
+  document.getElementById(id).innerHTML=h+'</table>';
+}
+function $(i){return document.getElementById(i)}
+$("elig").innerHTML='<div class="q">ক. আপনি কি বর্তমানে কোনো কারখানা বা শিল্পপ্রতিষ্ঠানে বেতন বা মজুরির বিনিময়ে কাজ করেন?<span class="en">A. Do you currently work for pay in a factory or industrial workplace?</span></div><div class="opts">'+YN.map(function(o){return rad("eligible",o[0],o[1])}).join("")+'</div><p class="en">উত্তর "না" হলে জরিপ এখানেই শেষ। / If "No", the survey ends here.</p>';
+$("consent").innerHTML='<div class="q">গ. আগামী ১৮ মাসে প্রতি ৬ মাস অন্তর একই জরিপে অংশ নিতে আপনি কি সম্মত?<span class="en">C. Do you agree to take part in the same survey every 6 months over the next 18 months?</span></div><div class="opts">'+YN.map(function(o){return rad("consent_followup",o[0],o[1])}).join("")+'</div>';
+$("q3").innerHTML=[["rmg","তৈরি পোশাক (গার্মেন্টস) / Garments / RMG"],["textile","টেক্সটাইল ও বয়ন / Textile & weaving"],["food","খাদ্য ও পানীয় প্রক্রিয়াকরণ / Food & beverage processing"],["heavy","ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry"]].map(function(o){return rad("q3_sector",o[0],o[1])+"<br>"}).join("")+rad("q3_sector","other","অন্যান্য (লিখুন) / Other (specify):")+' <input type="text" name="q3_other" id="q3o" style="width:12em">';
+$("q5").innerHTML=[["day","শুধু দিনের শিফট / Day shift only"],["rotating","ঘূর্ণায়মান শিফট / Rotating shifts"],["night","শুধু রাতের শিফট / Night shift only"]].map(function(o){return rad("q5_shift",o[0],o[1])}).join("");
+grid("g6","q6_",0,AG,[["আমাকে খুব দ্রুত গতিতে কাজ করতে হয়।","I have to work at a very fast pace."],["কাজের বিরতি কখন নেব তা আমি নিজে ঠিক করতে পারি।","I can decide when to take my breaks."],["প্রয়োজনে আমি আমার কাজের সময়সূচি বা শিফট পরিবর্তন করতে পারি।","When needed, I can change my work schedule or shift."],["কাজের সময় আমাকে নিজের প্রকৃত অনুভূতি লুকিয়ে রাখতে হয়।","At work I have to hide my true feelings."]]);
+grid("g7","q7_",0,AG,[["আমার কাজের গতি মেশিন, সফটওয়্যার বা ডিজিটাল সিস্টেম দ্বারা নির্ধারিত হয়।","My work pace is set by machines, software or a digital system."],["আমার কাজের পরিমাণ বা সময় ডিজিটাল ব্যবস্থায় (যেমন স্ক্যানার, ক্যামেরা, কম্পিউটার) নিয়মিত পর্যবেক্ষণ করা হয়।","My output or time is regularly monitored by digital systems (e.g., scanners, cameras, computers)."]]);
+$("q9").innerHTML=[1,2,3,4,5].map(function(n){return rad("q9_drowsy",n,bn(n))}).join("");
+$("q10").innerHTML=YN.map(function(o){return rad("q10_illness",o[0],o[1])}).join("");
+grid("g11","q11_phq",0,PH,[["কোনো কাজে আগ্রহ বা আনন্দ কম পাওয়া","Little interest or pleasure in doing things"],["মন খারাপ, বিষণ্ণ বা হতাশ বোধ করা","Feeling down, depressed, or hopeless"],["ঘুম আসতে বা ঘুম ধরে রাখতে সমস্যা, অথবা অতিরিক্ত ঘুম","Trouble falling or staying asleep, or sleeping too much"],["ক্লান্ত বোধ করা বা শক্তি কম থাকা","Feeling tired or having little energy"],["খিদে কমে যাওয়া বা অতিরিক্ত খাওয়া","Poor appetite or overeating"],["নিজের সম্পর্কে খারাপ ধারণা — নিজেকে ব্যর্থ মনে হওয়া, অথবা নিজেকে বা পরিবারকে হতাশ করেছেন বলে মনে হওয়া","Feeling bad about yourself — or that you are a failure or have let yourself or your family down"],["মনোযোগ দিতে অসুবিধা, যেমন পত্রিকা পড়া বা টিভি দেখার সময়","Trouble concentrating on things, such as reading the newspaper or watching television"],["এত ধীরে নড়াচড়া বা কথা বলা যে অন্যরা খেয়াল করতে পারে; অথবা উল্টোটা — এত অস্থির বা ছটফটে থাকা যে স্বাভাবিকের চেয়ে অনেক বেশি নড়াচড়া করতে হয়","Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual"],["মনে হওয়া যে আপনি মারা গেলে ভালো হতো, অথবা নিজেকে কোনোভাবে আঘাত করার চিন্তা","Thoughts that you would be better off dead, or of hurting yourself in some way"]]);
+grid("g12","q12_cbi",0,CB,[["আপনি কত ঘন ঘন ক্লান্তি বোধ করেন?","How often do you feel tired?"],["আপনি কত ঘন ঘন শারীরিকভাবে নিঃশেষ বোধ করেন?","How often are you physically exhausted?"],["আপনি কত ঘন ঘন মানসিকভাবে নিঃশেষ বোধ করেন?","How often are you emotionally exhausted?"],["আপনি কত ঘন ঘন ভাবেন, \"আর পারছি না\"?","How often do you think: \"I can't take it anymore\"?"],["আপনি কত ঘন ঘন নিজেকে অবসন্ন মনে করেন?","How often do you feel worn out?"],["আপনি কত ঘন ঘন নিজেকে দুর্বল এবং অসুস্থ হয়ে পড়ার ঝুঁকিতে মনে করেন?","How often do you feel weak and susceptible to illness?"]]);
+$("q13d").innerHTML=[0,1,2,3,4,5,6,7,8,9,10].map(function(n){return rad("q13d_effect",n,bn(n))}).join("");
+
+// Researcher-only fields from the link: ?wave=T1&factory=F03&date=26/10/2026
+var P=new URLSearchParams(location.search), w=(P.get("wave")||"").toUpperCase();
+$("wave").innerHTML=["T1","T2","T3","T4"].map(function(t){return '<label style="margin-right:14px"><input type="radio" name="wave" value="'+t+'"'+(w?' disabled':'')+(w==t?' checked':'')+'> '+t+'</label>'}).join("");
+var d=new Date(), pad=function(n){return ("0"+n).slice(-2)};
+$("date").value=P.get("date")||(pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear());
+if(P.get("factory")){$("factory").value=P.get("factory");$("factory").readOnly=true}
+
+var f=$("f"), rest=$("rest");
+function val(n){var e=f.querySelector('input[name="'+n+'"]:checked');return e?e.value:""}
+function sync(){
+  var no=val("eligible")=="no";
+  rest.classList.toggle("hide",!(val("eligible")=="yes"));
+  if(no){$("err").textContent=""}
+  $("q3o").disabled=val("q3_sector")!="other";
+  var z=$("q13c").value!==""&&Number($("q13c").value)==0;
+  $("q13d").style.opacity=$("q13dq").style.opacity=z?.4:1;
+}
+f.addEventListener("change",sync);f.addEventListener("input",sync);sync();
+
+function finish(html){f.classList.add("hide");var m=$("done");m.innerHTML=html;m.classList.remove("hide");m.focus();window.scrollTo(0,0)}
+f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var el=val("eligible");
+  if(!el){$("err").textContent="";alert("অনুগ্রহ করে ক নং প্রশ্নের উত্তর দিন। / Please answer question A.");return}
+  if(el=="no"){send({wave:val("wave")||w,date:$("date").value,factory:$("factory").value,eligible:"no"},function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>এই জরিপের জন্য আপনি যোগ্য নন। আপনার সময়ের জন্য ধন্যবাদ।<span class='en'>You are not eligible for this survey. Thank you for your time.</span></p>")});return}
+  var miss=[];
+  if(!/^[A-Za-z][0-9]{4}$/.test($("code").value.trim()))miss.push("খ (কোড / code: R0391)");
+  ["consent_followup","q3_sector","q5_shift","q9_drowsy","q10_illness"].forEach(function(n){if(!val(n))miss.push(n)});
+  ["q1_age","q2_gender","q4_team","q8_sleep_hours","q13a_missed_health","q13b_missed_other","q13c_hours_worked"].forEach(function(n){if(!f.elements[n].value.trim())miss.push(n)});
+  if(val("q3_sector")=="other"&&!$("q3o").value.trim())miss.push("q3_other");
+  [["q6_",4],["q7_",2],["q11_phq",9],["q12_cbi",6]].forEach(function(g){for(var i=1;i<=g[1];i++)if(!val(g[0]+i))miss.push(g[0]+i)});
+  if(Number($("q13c").value)>0&&val("q13d_effect")==="")miss.push("q13d_effect");
+  if(miss.length){$("err").innerHTML="কিছু প্রশ্নের উত্তর বাকি আছে / Some answers are missing: "+miss.slice(0,6).join(", ")+(miss.length>6?" …":"");var t=miss[0];var x=f.querySelector('[name="'+t+'"]');if(x)x.scrollIntoView({block:"center"});return}
+  $("err").textContent="";
+  var o={wave:val("wave")||w,date:$("date").value,factory:$("factory").value,eligible:"yes",code:$("code").value.trim().toUpperCase()};
+  var fd=new FormData(f);
+  fd.forEach(function(v,k){if(["wave","date","factory","code","eligible"].indexOf(k)<0)o[k]=v});
+  if(o.q3_sector!="other")o.q3_other="";
+  if(Number($("q13c").value)==0)o.q13d_effect="";
+  send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p>"+HELP)});
+});
+function send(o,ok){
+  var b=$("btn");b.disabled=true;
+  if(ENDPOINT.indexOf("PASTE")==0){alert("ENDPOINT not set in the HTML file.");b.disabled=false;return}
+  fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(o)})
+  .then(ok).catch(function(){b.disabled=false;$("err").textContent="জমা হয়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন। / Not submitted. Check your connection and try again."});
+}
+</script>
+</body>
+</html>
