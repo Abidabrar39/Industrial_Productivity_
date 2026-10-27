@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>জরিপ প্রশ্নমালা / Survey Questionnaire</title>
-select.hrs{font:inherit;padding:5px 8px;border:1px solid var(--line);background:#fff;min-width:11em}
 <style>
 :root{--ink:#000;--paper:#fff;--line:#7f7f7f;--soft:#f2f2f2;--warn:#8a1c1c;--navy:#1F3864;--blue:#D9E2F3;--grey:#595959}
 *{box-sizing:border-box}
@@ -23,10 +22,11 @@ h3{font-size:1rem;font-weight:400;color:var(--navy);margin:18px 0 4px}
 .opts label{display:inline-flex;align-items:center;gap:6px;margin:4px 16px 4px 0;cursor:pointer}
 input[type=radio]{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1px solid var(--ink);border-radius:0;margin:0;display:inline-grid;place-content:center;background:#fff;flex:none;cursor:pointer}
 input[type=radio]:checked::after{content:"✓";font-size:14px;line-height:1;font-weight:700}
-input[type=radio]:focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
+input[type=radio]:focus-visible,input[type=text]:focus-visible,input[type=number]:focus-visible,select:focus-visible{outline:3px solid #1a5fb4;outline-offset:2px}
 input[type=radio]:disabled{background:var(--soft);cursor:default}
 input[type=text],input[type=number]{font:inherit;border:0;border-bottom:1.5px solid var(--line);padding:4px 2px;background:transparent;min-width:0}
 input[type=text].w,input[type=number].w{width:100%;max-width:340px}
+select.hrs{font:inherit;padding:6px 8px;border:1px solid var(--line);background:#fff;min-width:16em;max-width:100%}
 .code{letter-spacing:.35em;font-size:1.2rem;width:9em!important;text-transform:uppercase}
 .tw{overflow-x:auto;margin:8px 0}
 table{border-collapse:collapse;width:100%;min-width:560px}
@@ -44,6 +44,11 @@ button:disabled{opacity:.5}
 .hide{display:none}
 @media print{body{background:#fff}form{border:0}button{display:none}}
 @media(max-width:600px){form,.msg{margin:0;padding:18px 14px;border:0}}
+div.bad{background:#fde8e8;border-left:4px solid #c00;padding-left:8px}
+div.q.bad{color:#a00}
+tr.bad td{background:#fde8e8}
+tr.bad td:first-child{border-left:4px solid #c00;color:#a00}
+input.bad{background:#fde8e8;border-bottom-color:#c00}
 </style>
 </head>
 <body>
@@ -69,11 +74,13 @@ button:disabled{opacity:.5}
 <div class="q">১. আপনার বর্তমান বয়স কত?<span class="en">What is your current age?</span></div>
 <div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q1_age" min="14" max="90" inputmode="numeric"> বছর</div>
 <div class="q">২. আপনার লিঙ্গ পরিচয় কী?<span class="en">What is your gender identity?</span></div>
-<div class="opts"><label><input type="radio" name="q2_gender"name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" <div>উত্তর: <input type="text" class="w" name="q2_gender"></div> value="female"> মহিলা / Female</label></div>
+<div class="opts"><label><input type="radio" name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" name="q2_gender" value="female"> মহিলা / Female</label></div>
 <div class="q">৩. আপনার প্রতিষ্ঠান কোন খাতের?<span class="en">Which sector is your workplace in?</span></div>
 <div id="q3" class="opts"></div>
-<div class="q">৪. আপনার সেকশন, লাইন বা দলের নাম কী? (গবেষক এটি থেকে দলের কোড নির্ধারণ করবেন)<span class="en">What is the name of your section / line / team? (the researcher assigns the team code from this)</span></div>
-<div>সেকশন/লাইন/দল: <input type="text" class="w" name="q4_team"></div>
+<div class="q">৪. আপনি কোন বিভাগে কাজ করেন? (যেমন: উৎপাদন, মান নিয়ন্ত্রণ, রক্ষণাবেক্ষণ, প্যাকিং, গুদাম, প্রশাসন)<span class="en">Which department do you work in? (e.g., production, quality control, maintenance, packing, warehouse, administration)</span></div>
+<div>বিভাগ / Department: <input type="text" class="w" name="q4_team"></div>
+<div class="q">৪খ. আপনার পদবি কী? (যেমন: অপারেটর, টেকনিশিয়ান, হেল্পার, সুপারভাইজার, অফিসার, ম্যানেজার)<span class="en">What is your designation? (e.g., operator, technician, helper, supervisor, officer, manager)</span></div>
+<div>পদবি / Designation: <input type="text" class="w" name="q4b_designation"></div>
 <div class="q">৫. আপনার কাজের শিফটের ধরন কী?<span class="en">What is your shift pattern?</span></div>
 <div id="q5" class="opts"></div>
 
@@ -86,7 +93,13 @@ button:disabled{opacity:.5}
 
 <h2>সেকশন ৩: ঘুম ও স্বাস্থ্য<small>Section 3 — Sleep &amp; Health</small></h2>
 <div class="q">৮. কর্মদিবসগুলোতে আপনি গড়ে প্রতিদিন কত ঘণ্টা ঘুমান?<span class="en">On workdays, how many hours do you sleep on average per day?</span></div>
-<div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q8_sleep_hours" min="0" max="24" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div>উত্তর / Answer:
+<select class="hrs" name="q8_sleep_hours">
+<option value="">— নির্বাচন করুন —</option>
+<option value="less_than_6">৬ ঘণ্টার কম</option>
+<option value="6_to_8">৬ থেকে ৮ ঘণ্টা</option>
+<option value="more_than_8">৮ ঘণ্টার বেশি</option>
+</select></div>
 <div class="q">৯. গত ৪ সপ্তাহে কাজ করার সময় আপনার কত ঘন ঘন অতিরিক্ত তন্দ্রাচ্ছন্নতা অনুভব হয়েছে বা জেগে থাকতে কষ্ট হয়েছে? (১ = কখনও নয়, ৫ = প্রতিদিন)<span class="en">In the past 4 weeks, how often did you feel excessively drowsy or struggle to stay awake at work? (1 = never, 5 = every day)</span></div>
 <div id="q9" class="opts scale"></div>
 <div class="q">১০. আপনার কি দীর্ঘমেয়াদী কোনো শারীরিক রোগ নির্ণয় করা হয়েছে? (যেমন: উচ্চ রক্তচাপ, ডায়াবেটিস, হৃদরোগ)<span class="en">Have you been diagnosed with a long-term physical illness? (e.g., hypertension, diabetes, heart disease)</span></div>
@@ -99,11 +112,26 @@ button:disabled{opacity:.5}
 <div id="g12" class="tw"></div>
 <h3>১৩. কর্মক্ষমতা ও কাজের ক্ষতি (WPAI:GH, প্রশ্ন ১–৫, গত ৭ দিন)<small>Work Productivity and Activity Impairment, General Health (WPAI:GH), questions 1–5, past 7 days</small></h3>
 <div class="q">ক. গত ৭ দিনে স্বাস্থ্যসমস্যার কারণে আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন? (অসুস্থতার ছুটি, দেরিতে আসা, আগে চলে যাওয়া সহ)<span class="en">During the past 7 days, how many hours did you miss from work because of health problems?</span></div>
-<div><input type="number" class="w" style="max-width:6em" name="q13a_missed_health" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div><select class="hrs" name="q13a_missed_health">
+<option value="">— নির্বাচন করুন —</option>
+<option value="0">০ ঘণ্টা</option>
+<option value="1_to_8">১ থেকে ৮ ঘণ্টা</option>
+<option value="more_than_8">৮ ঘণ্টার বেশি</option>
+</select></div>
 <div class="q">খ. গত ৭ দিনে অন্য কোনো কারণে (যেমন ছুটি, সরকারি ছুটি, এই গবেষণায় অংশ নেওয়া) আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন?<span class="en">During the past 7 days, how many hours did you miss from work for any other reason?</span></div>
-<div><input type="number" class="w" style="max-width:6em" name="q13b_missed_other" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
-<div class="q">গ. গত ৭ দিনে আপনি আসলে কত ঘণ্টা কাজ করেছেন? (০ হলে পরের প্রশ্ন বাদ দিন)<span class="en">During the past 7 days, how many hours did you actually work?</span></div>
-<div><input type="number" class="w" style="max-width:6em" name="q13c_hours_worked" id="q13c" min="0" max="168" step="0.5" inputmode="decimal"> ঘণ্টা</div>
+<div><select class="hrs" name="q13b_missed_other">
+<option value="">— নির্বাচন করুন —</option>
+<option value="0">০ ঘণ্টা</option>
+<option value="1_to_8">১ থেকে ৮ ঘণ্টা</option>
+<option value="more_than_8">৮ ঘণ্টার বেশি</option>
+</select></div>
+<div class="q">গ. গত ৭ দিনে আপনি আসলে কত ঘণ্টা কাজ করেছেন?<span class="en">During the past 7 days, how many hours did you actually work?</span></div>
+<div><select class="hrs" name="q13c_hours_worked" id="q13c">
+<option value="">— নির্বাচন করুন —</option>
+<option value="less_than_40">৪০ ঘণ্টার কম</option>
+<option value="40_to_48">৪০ থেকে ৪৮ ঘণ্টা</option>
+<option value="more_than_48">৪৮ ঘণ্টার বেশি</option>
+</select></div>
 <div class="q" id="q13dq">ঘ. গত ৭ দিনে কাজ করার সময় স্বাস্থ্যসমস্যা আপনার কাজের উৎপাদনশীলতাকে কতটা প্রভাবিত করেছে? (০ = কোনো প্রভাব পড়েনি, ১০ = কাজ করতে সম্পূর্ণ অক্ষম ছিলাম)<span class="en">During the past 7 days, how much did health problems affect your productivity while you were working? (0 = no effect, 10 = completely prevented me from working)</span></div>
 <div id="q13d" class="opts scale"></div>
 
@@ -163,31 +191,58 @@ function sync(){
   rest.classList.toggle("hide",!(val("eligible")=="yes"));
   if(no){$("err").textContent=""}
   $("q3o").disabled=val("q3_sector")!="other";
-  var z=$("q13c").value!==""&&Number($("q13c").value)==0;
-  $("q13d").style.opacity=$("q13dq").style.opacity=z?.4:1;
 }
 f.addEventListener("change",sync);f.addEventListener("input",sync);sync();
 
 function finish(html){f.classList.add("hide");var m=$("done");m.innerHTML=html;m.classList.remove("hide");m.focus();window.scrollTo(0,0)}
+function mark(n,on){
+  var x=f.querySelector('[name="'+n+'"]'); if(!x)return;
+  var c=x.closest("tr")||(n=="pid"?x:x.closest("div"));
+  if(!c)return;
+  c.classList.toggle("bad",on);
+  var p=c.previousElementSibling;
+  if(c.tagName=="DIV"&&p&&p.classList.contains("q"))p.classList.toggle("bad",on);
+}
+function isEmpty(n){
+  var x=f.querySelector('[name="'+n+'"]'); if(!x)return false;
+  if(x.type=="radio")return val(n)==="";
+  return !x.value.trim();
+}
+function allFields(){
+  var a=["pid","consent_followup","q1_age","q2_gender","q3_sector","q4_team","q4b_designation","q5_shift"],i;
+  if(val("q3_sector")=="other")a.push("q3_other");
+  for(i=1;i<=4;i++)a.push("q6_"+i);
+  for(i=1;i<=2;i++)a.push("q7_"+i);
+  a=a.concat(["q8_sleep_hours","q9_drowsy","q10_illness"]);
+  for(i=1;i<=9;i++)a.push("q11_phq"+i);
+  for(i=1;i<=6;i++)a.push("q12_cbi"+i);
+  return a.concat(["q13a_missed_health","q13b_missed_other","q13c_hours_worked","q13d_effect"]);
+}
+function clearMark(e){
+  var n=e.target&&e.target.name; if(!n)return;
+  if(!isEmpty(n))mark(n,false);
+  if(!f.querySelector(".bad"))$("err").textContent="";
+}
+f.addEventListener("change",clearMark);
+f.addEventListener("input",clearMark);
 f.addEventListener("submit",function(e){
   e.preventDefault();
   var el=val("eligible");
   if(!el){$("err").textContent="";alert("অনুগ্রহ করে ক নং প্রশ্নের উত্তর দিন। / Please answer question A.");return}
   if(el=="no"){send({wave:val("wave")||w,date:$("date").value,factory:$("factory").value,pid:$("pid").value.trim(),eligible:"no"},function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>এই জরিপের জন্য আপনি যোগ্য নন। আপনার সময়ের জন্য ধন্যবাদ।<span class='en'>You are not eligible for this survey. Thank you for your time.</span></p>")});return}
-  var miss=[];
-  if(!$("pid").value.trim())miss.push("pid");
-  ["consent_followup","q3_sector","q5_shift","q9_drowsy","q10_illness"].forEach(function(n){if(!val(n))miss.push(n)});
-  ["q1_age","q2_gender","q4_team","q8_sleep_hours","q13a_missed_health","q13b_missed_other","q13c_hours_worked"].forEach(function(n){if(!f.elements[n].value.trim())miss.push(n)});
-  if(val("q3_sector")=="other"&&!$("q3o").value.trim())miss.push("q3_other");
-  [["q6_",4],["q7_",2],["q11_phq",9],["q12_cbi",6]].forEach(function(g){for(var i=1;i<=g[1];i++)if(!val(g[0]+i))miss.push(g[0]+i)});
-  if(Number($("q13c").value)>0&&val("q13d_effect")==="")miss.push("q13d_effect");
-  if(miss.length){$("err").innerHTML="কিছু প্রশ্নের উত্তর বাকি আছে / Some answers are missing: "+miss.slice(0,6).join(", ")+(miss.length>6?" …":"");var t=miss[0];var x=f.querySelector('[name="'+t+'"]');if(x)x.scrollIntoView({block:"center"});return}
+  var all=allFields(), miss=all.filter(isEmpty);
+  all.forEach(function(n){mark(n,false)});
+  miss.forEach(function(n){mark(n,true)});
+  if(miss.length){
+    $("err").textContent="লাল চিহ্নিত প্রশ্নগুলোর উত্তর দিন / Please answer the questions marked in red ("+miss.length+")";
+    var bad=f.querySelector(".bad"); if(bad)bad.scrollIntoView({block:"center",behavior:"smooth"});
+    return;
+  }
   $("err").textContent="";
   var o={wave:val("wave")||w,date:$("date").value,factory:$("factory").value,pid:$("pid").value.trim(),eligible:"yes"};
   var fd=new FormData(f);
   fd.forEach(function(v,k){if(["wave","date","factory","pid","eligible"].indexOf(k)<0)o[k]=v});
   if(o.q3_sector!="other")o.q3_other="";
-  if(Number($("q13c").value)==0)o.q13d_effect="";
   send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p>"+HELP)});
 });
 function send(o,ok){
