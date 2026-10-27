@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>জরিপ প্রশ্নমালা / Survey Questionnaire</title>
+select.hrs{font:inherit;padding:5px 8px;border:1px solid var(--line);background:#fff;min-width:11em}
 <style>
 :root{--ink:#000;--paper:#fff;--line:#7f7f7f;--soft:#f2f2f2;--warn:#8a1c1c;--navy:#1F3864;--blue:#D9E2F3;--grey:#595959}
 *{box-sizing:border-box}
@@ -54,22 +55,21 @@ button:disabled{opacity:.5}
 <fieldset class="box"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
 <div class="opts"><b>জরিপের ধাপ / Wave:</b> <span id="wave"></span></div>
 <div style="margin-top:8px"><b>তারিখ / Date:</b> <input type="text" id="date" name="date" readonly style="width:9em"> <span class="en" style="display:inline">(DD/MM/YYYY)</span>
-&nbsp; <b>কারখানার কোড / Factory code:</b> <input type="text" id="factory" name="factory" style="width:7em"></div></fieldset>
+&nbsp; <b>কারখানার কোড / Factory code:</b> <input type="text" id="factory" name="factory" style="width:7em">
+&nbsp; <b>অংশগ্রহণকারী আইডি / Participant ID:</b> <input type="text" id="pid" name="pid" style="width:7em"> <span class="en" style="display:inline">(researcher assigns at T1, reused at T2 and T3)</span></div></fieldset>
 
 <h2>যোগ্যতা যাচাই<small>Eligibility</small></h2>
 <div id="elig"></div>
 <div id="rest">
 
-<h2>অংশগ্রহণকারী কোড ও পরবর্তী জরিপে সম্মতি<small>Participant Linkage Code &amp; Follow-up Consent</small></h2>
-<div class="q">খ. আপনার ব্যক্তিগত কোড তৈরি করুন: মায়ের নামের প্রথম অক্ষর (ইংরেজিতে) + আপনার জন্মমাস (২ অঙ্ক) + জন্মসালের শেষ ২ অঙ্ক।<span class="en">B. Create your personal code: first letter of your mother's first name (English) + your birth month (2 digits) + last 2 digits of your birth year.</span></div>
-<div>কোড / Code: <input type="text" class="code" name="code" id="code" maxlength="5" autocomplete="off" inputmode="latin" placeholder="R0391"> (উদাহরণ / e.g., R0391)</div>
+<h2>অংশগ্রহণকারীর পরবর্তী জরিপে সম্মতি<small>Follow-up Consent</small></h2>
 <div id="consent"></div>
 
 <h2>সেকশন ১: পরিচিতি ও কাজের ধরন<small>Section 1 — Background &amp; Work</small></h2>
 <div class="q">১. আপনার বর্তমান বয়স কত?<span class="en">What is your current age?</span></div>
 <div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q1_age" min="14" max="90" inputmode="numeric"> বছর</div>
 <div class="q">২. আপনার লিঙ্গ পরিচয় কী?<span class="en">What is your gender identity?</span></div>
-<div>উত্তর: <input type="text" class="w" name="q2_gender"></div>
+<div class="opts"><label><input type="radio" name="q2_gender"name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" <div>উত্তর: <input type="text" class="w" name="q2_gender"></div> value="female"> মহিলা / Female</label></div>
 <div class="q">৩. আপনার প্রতিষ্ঠান কোন খাতের?<span class="en">Which sector is your workplace in?</span></div>
 <div id="q3" class="opts"></div>
 <div class="q">৪. আপনার সেকশন, লাইন বা দলের নাম কী? (গবেষক এটি থেকে দলের কোড নির্ধারণ করবেন)<span class="en">What is the name of your section / line / team? (the researcher assigns the team code from this)</span></div>
@@ -78,7 +78,7 @@ button:disabled{opacity:.5}
 <div id="q5" class="opts"></div>
 
 <h2>সেকশন ২: কাজের চাপ, নিয়ন্ত্রণ ও স্বয়ংক্রিয়তা<small>Section 2 — Job Demands, Control &amp; Automation</small></h2>
-<p>গত ৬ মাসের অভিজ্ঞতা অনুযায়ী প্রতিটি বক্তব্যের সাথে আপনি কতটা একমত?<span class="en">Thinking of the past 6 months, how much do you agree with each statement?</span></p>
+<p>গত ৪ মাসের অভিজ্ঞতা অনুযায়ী প্রতিটি বক্তব্যের সাথে আপনি কতটা একমত?<span class="en">Thinking of the past 4 months, how much do you agree with each statement?</span></p>
 <h3>৬. কাজের চাপ, সময়ের নিয়ন্ত্রণ ও আবেগজনিত শ্রম<small>Job demands, work time control &amp; emotional labor</small></h3>
 <div id="g6" class="tw"></div>
 <h3>৭. স্বয়ংক্রিয়তা ও ডিজিটাল ব্যবস্থাপনা<small>Automation &amp; algorithmic management</small></h3>
@@ -95,7 +95,7 @@ button:disabled{opacity:.5}
 <h2>সেকশন ৪: বিষণ্ণতা, বার্নআউট ও কর্মক্ষমতা<small>Section 4 — Depression, Burnout &amp; Work Productivity</small></h2>
 <h3>১১. বিষণ্ণতা (PHQ-9): গত ২ সপ্তাহে নিচের সমস্যাগুলো আপনাকে কত ঘন ঘন বিরক্ত করেছে?<small>Depression (PHQ-9): Over the last 2 weeks, how often have you been bothered by the following problems?</small></h3>
 <div id="g11" class="tw"></div>
-<h3>১২. বার্নআউট (কোপেনহেগেন বার্নআউট ইনভেন্টরি — ব্যক্তিগত বার্নআউট, ৬টি আইটেম): গত ৬ মাসে<small>Burnout (Copenhagen Burnout Inventory — personal burnout subscale, 6 items): over the past 6 months</small></h3>
+<h3>১২. বার্নআউট (কোপেনহেগেন বার্নআউট ইনভেন্টরি — ব্যক্তিগত বার্নআউট, ৬টি আইটেম): গত ৪ মাসে<small>Burnout (Copenhagen Burnout Inventory — personal burnout subscale, 6 items): over the past 4 months</small></h3>
 <div id="g12" class="tw"></div>
 <h3>১৩. কর্মক্ষমতা ও কাজের ক্ষতি (WPAI:GH, প্রশ্ন ১–৫, গত ৭ দিন)<small>Work Productivity and Activity Impairment, General Health (WPAI:GH), questions 1–5, past 7 days</small></h3>
 <div class="q">ক. গত ৭ দিনে স্বাস্থ্যসমস্যার কারণে আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন? (অসুস্থতার ছুটি, দেরিতে আসা, আগে চলে যাওয়া সহ)<span class="en">During the past 7 days, how many hours did you miss from work because of health problems?</span></div>
@@ -118,10 +118,9 @@ button:disabled{opacity:.5}
 <div class="msg hide" id="done" tabindex="-1"></div>
 
 <script>
-// ====== SETTINGS: paste your Google Apps Script Web App URL here ======
-var ENDPOINT = https://script.google.com/macros/s/AKfycbxI-DteUA8aGtguxYMAnC39zFoZlSwS99ZoO2lKgJ6jhDG2E80drTuVB8co9AyJG5X4/exec;
-// =====================================================================
-// =====================================================================
+// ====== SETTINGS: Google Apps Script Web App URL (keep the quotes!) ======
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbzJmlKHUJ1K_7nRV0auvjK4RsIsLZFEgO_mqaeOivyX06-O748QbOF8kMnpB7Q7sauIPw/exec";
+// =========================================================================
 var HELP = '<div class="help"><b>সহায়তা প্রয়োজন হলে</b>কান পেতে রই: ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা – রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।<span class="en">Kaan Pete Roi: 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>';
 var YN = [["yes","হ্যাঁ / Yes"],["no","না / No"]];
 var AG = [[1,"সম্পূর্ণ দ্বিমত","Strongly disagree"],[2,"দ্বিমত","Disagree"],[3,"নিরপেক্ষ","Neutral"],[4,"একমত","Agree"],[5,"সম্পূর্ণ একমত","Strongly agree"]];
@@ -138,7 +137,7 @@ function grid(id,pre,head,scale,items){
 }
 function $(i){return document.getElementById(i)}
 $("elig").innerHTML='<div class="q">ক. আপনি কি বর্তমানে কোনো কারখানা বা শিল্পপ্রতিষ্ঠানে বেতন বা মজুরির বিনিময়ে কাজ করেন?<span class="en">A. Do you currently work for pay in a factory or industrial workplace?</span></div><div class="opts">'+YN.map(function(o){return rad("eligible",o[0],o[1])}).join("")+'</div><p class="en">উত্তর "না" হলে জরিপ এখানেই শেষ। / If "No", the survey ends here.</p>';
-$("consent").innerHTML='<div class="q">গ. আগামী ১৮ মাসে প্রতি ৬ মাস অন্তর একই জরিপে অংশ নিতে আপনি কি সম্মত?<span class="en">C. Do you agree to take part in the same survey every 6 months over the next 18 months?</span></div><div class="opts">'+YN.map(function(o){return rad("consent_followup",o[0],o[1])}).join("")+'</div>';
+$("consent").innerHTML='<div class="q">খ. আগামী ১২ মাসে প্রতি ৪ মাস অন্তর একই জরিপে (মোট ৩টি ধাপ) অংশ নিতে আপনি কি সম্মত?<span class="en">B. Do you agree to take part in the same survey every 4 months over the next 12 months (3 waves in total)?</span></div><div class="opts">'+YN.map(function(o){return rad("consent_followup",o[0],o[1])}).join("")+'</div>';
 $("q3").innerHTML=[["rmg","তৈরি পোশাক (গার্মেন্টস) / Garments / RMG"],["textile","টেক্সটাইল ও বয়ন / Textile & weaving"],["food","খাদ্য ও পানীয় প্রক্রিয়াকরণ / Food & beverage processing"],["heavy","ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry"]].map(function(o){return rad("q3_sector",o[0],o[1])+"<br>"}).join("")+rad("q3_sector","other","অন্যান্য (লিখুন) / Other (specify):")+' <input type="text" name="q3_other" id="q3o" style="width:12em">';
 $("q5").innerHTML=[["day","শুধু দিনের শিফট / Day shift only"],["rotating","ঘূর্ণায়মান শিফট / Rotating shifts"],["night","শুধু রাতের শিফট / Night shift only"]].map(function(o){return rad("q5_shift",o[0],o[1])}).join("");
 grid("g6","q6_",0,AG,[["আমাকে খুব দ্রুত গতিতে কাজ করতে হয়।","I have to work at a very fast pace."],["কাজের বিরতি কখন নেব তা আমি নিজে ঠিক করতে পারি।","I can decide when to take my breaks."],["প্রয়োজনে আমি আমার কাজের সময়সূচি বা শিফট পরিবর্তন করতে পারি।","When needed, I can change my work schedule or shift."],["কাজের সময় আমাকে নিজের প্রকৃত অনুভূতি লুকিয়ে রাখতে হয়।","At work I have to hide my true feelings."]]);
@@ -149,18 +148,14 @@ grid("g11","q11_phq",0,PH,[["কোনো কাজে আগ্রহ বা �
 grid("g12","q12_cbi",0,CB,[["আপনি কত ঘন ঘন ক্লান্তি বোধ করেন?","How often do you feel tired?"],["আপনি কত ঘন ঘন শারীরিকভাবে নিঃশেষ বোধ করেন?","How often are you physically exhausted?"],["আপনি কত ঘন ঘন মানসিকভাবে নিঃশেষ বোধ করেন?","How often are you emotionally exhausted?"],["আপনি কত ঘন ঘন ভাবেন, \"আর পারছি না\"?","How often do you think: \"I can't take it anymore\"?"],["আপনি কত ঘন ঘন নিজেকে অবসন্ন মনে করেন?","How often do you feel worn out?"],["আপনি কত ঘন ঘন নিজেকে দুর্বল এবং অসুস্থ হয়ে পড়ার ঝুঁকিতে মনে করেন?","How often do you feel weak and susceptible to illness?"]]);
 $("q13d").innerHTML=[0,1,2,3,4,5,6,7,8,9,10].map(function(n){return rad("q13d_effect",n,bn(n))}).join("");
 
-// Researcher-only fields from the link: ?wave=T1&factory=F03&date=26/10/2026
+// Researcher-only fields from the link: ?wave=T1&factory=F03&pid=P001&date=27/10/2026
 var P=new URLSearchParams(location.search), w=(P.get("wave")||"").toUpperCase();
-$("wave").innerHTML=["T1","T2","T3","T4"].map(function(t){return '<label style="margin-right:14px"><input type="radio" name="wave" value="'+t+'"'+(w?' disabled':'')+(w==t?' checked':'')+'> '+t+'</label>'}).join("");
+$("wave").innerHTML=["T1","T2","T3"].map(function(t){return '<label style="margin-right:14px"><input type="radio" name="wave" value="'+t+'"'+(w?' disabled':'')+(w==t?' checked':'')+'> '+t+'</label>'}).join("");
 var d=new Date(), pad=function(n){return ("0"+n).slice(-2)};
 $("date").value=P.get("date")||(pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear());
+if(P.get("pid")){$("pid").value=P.get("pid");$("pid").readOnly=true}
 if(P.get("factory")){$("factory").value=P.get("factory");$("factory").readOnly=true}
 
-document.querySelectorAll("select.hrs").forEach(function(s){
-  var max=Number(s.dataset.max), step=Number(s.dataset.step), h='<option value="">— নির্বাচন করুন / Select —</option>';
-  for(var v=0; v<=max; v+=step){h+='<option value="'+v+'">'+v+'</option>'}
-  s.innerHTML=h;
-});
 var f=$("f"), rest=$("rest");
 function val(n){var e=f.querySelector('input[name="'+n+'"]:checked');return e?e.value:""}
 function sync(){
@@ -178,9 +173,9 @@ f.addEventListener("submit",function(e){
   e.preventDefault();
   var el=val("eligible");
   if(!el){$("err").textContent="";alert("অনুগ্রহ করে ক নং প্রশ্নের উত্তর দিন। / Please answer question A.");return}
-  if(el=="no"){send({wave:val("wave")||w,date:$("date").value,factory:$("factory").value,eligible:"no"},function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>এই জরিপের জন্য আপনি যোগ্য নন। আপনার সময়ের জন্য ধন্যবাদ।<span class='en'>You are not eligible for this survey. Thank you for your time.</span></p>")});return}
+  if(el=="no"){send({wave:val("wave")||w,date:$("date").value,factory:$("factory").value,pid:$("pid").value.trim(),eligible:"no"},function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>এই জরিপের জন্য আপনি যোগ্য নন। আপনার সময়ের জন্য ধন্যবাদ।<span class='en'>You are not eligible for this survey. Thank you for your time.</span></p>")});return}
   var miss=[];
-  if(!/^[A-Za-z][0-9]{4}$/.test($("code").value.trim()))miss.push("খ (কোড / code: R0391)");
+  if(!$("pid").value.trim())miss.push("pid");
   ["consent_followup","q3_sector","q5_shift","q9_drowsy","q10_illness"].forEach(function(n){if(!val(n))miss.push(n)});
   ["q1_age","q2_gender","q4_team","q8_sleep_hours","q13a_missed_health","q13b_missed_other","q13c_hours_worked"].forEach(function(n){if(!f.elements[n].value.trim())miss.push(n)});
   if(val("q3_sector")=="other"&&!$("q3o").value.trim())miss.push("q3_other");
@@ -188,9 +183,9 @@ f.addEventListener("submit",function(e){
   if(Number($("q13c").value)>0&&val("q13d_effect")==="")miss.push("q13d_effect");
   if(miss.length){$("err").innerHTML="কিছু প্রশ্নের উত্তর বাকি আছে / Some answers are missing: "+miss.slice(0,6).join(", ")+(miss.length>6?" …":"");var t=miss[0];var x=f.querySelector('[name="'+t+'"]');if(x)x.scrollIntoView({block:"center"});return}
   $("err").textContent="";
-  var o={wave:val("wave")||w,date:$("date").value,factory:$("factory").value,eligible:"yes",code:$("code").value.trim().toUpperCase()};
+  var o={wave:val("wave")||w,date:$("date").value,factory:$("factory").value,pid:$("pid").value.trim(),eligible:"yes"};
   var fd=new FormData(f);
-  fd.forEach(function(v,k){if(["wave","date","factory","code","eligible"].indexOf(k)<0)o[k]=v});
+  fd.forEach(function(v,k){if(["wave","date","factory","pid","eligible"].indexOf(k)<0)o[k]=v});
   if(o.q3_sector!="other")o.q3_other="";
   if(Number($("q13c").value)==0)o.q13d_effect="";
   send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p>"+HELP)});
