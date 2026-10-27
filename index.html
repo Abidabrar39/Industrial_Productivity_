@@ -50,6 +50,7 @@ tr.bad td{background:#fde8e8}
 tr.bad td:first-child{border-left:4px solid #c00;color:#a00}
 input.bad{background:#fde8e8;border-bottom-color:#c00}
 </style>
+<noscript><style>#rest{display:block!important}</style></noscript>
 </head>
 <body>
 <form id="f" novalidate>
@@ -58,17 +59,17 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 <span class="en">Please tick (✓) the applicable answer or write in the space provided. Your information will be kept strictly confidential.</span></p>
 
 <fieldset class="box"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
-<div class="opts"><b>জরিপের ধাপ / Wave:</b> <span id="wave"></span></div>
+<div class="opts"><b>জরিপের ধাপ / Wave:</b> <span id="wave"><label style="margin-right:14px"><input type="radio" name="wave" value="T1"> T1</label><label style="margin-right:14px"><input type="radio" name="wave" value="T2"> T2</label><label style="margin-right:14px"><input type="radio" name="wave" value="T3"> T3</label></span></div>
 <div style="margin-top:8px"><b>তারিখ / Date:</b> <input type="text" id="date" name="date" readonly style="width:9em"> <span class="en" style="display:inline">(DD/MM/YYYY)</span>
 &nbsp; <b>কারখানার কোড / Factory code:</b> <input type="text" id="factory" name="factory" style="width:7em">
 &nbsp; <b>অংশগ্রহণকারী আইডি / Participant ID:</b> <input type="text" id="pid" name="pid" style="width:7em"> <span class="en" style="display:inline">(researcher assigns at T1, reused at T2 and T3)</span></div></fieldset>
 
 <h2>যোগ্যতা যাচাই<small>Eligibility</small></h2>
-<div id="elig"></div>
-<div id="rest">
+<div id="elig"><div class="q">ক. আপনি কি বর্তমানে কোনো কারখানা বা শিল্পপ্রতিষ্ঠানে বেতন বা মজুরির বিনিময়ে কাজ করেন?<span class="en">A. Do you currently work for pay in a factory or industrial workplace?</span></div><div class="opts"><label><input type="radio" name="eligible" value="yes"> হ্যাঁ / Yes</label><label><input type="radio" name="eligible" value="no"> না / No</label></div><p class="en">উত্তর "না" হলে জরিপ এখানেই শেষ। / If "No", the survey ends here.</p></div>
+<div id="rest" class="hide">
 
 <h2>অংশগ্রহণকারীর পরবর্তী জরিপে সম্মতি<small>Follow-up Consent</small></h2>
-<div id="consent"></div>
+<div id="consent"><div class="q">খ. আগামী ১২ মাসে প্রতি ৪ মাস অন্তর একই জরিপে (মোট ৩টি ধাপ) অংশ নিতে আপনি কি সম্মত?<span class="en">B. Do you agree to take part in the same survey every 4 months over the next 12 months (3 waves in total)?</span></div><div class="opts"><label><input type="radio" name="consent_followup" value="yes"> হ্যাঁ / Yes</label><label><input type="radio" name="consent_followup" value="no"> না / No</label></div></div>
 
 <h2>সেকশন ১: পরিচিতি ও কাজের ধরন<small>Section 1 — Background &amp; Work</small></h2>
 <div class="q">১. আপনার বর্তমান বয়স কত?<span class="en">What is your current age?</span></div>
@@ -76,64 +77,64 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 <div class="q">২. আপনার লিঙ্গ পরিচয় কী?<span class="en">What is your gender identity?</span></div>
 <div class="opts"><label><input type="radio" name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" name="q2_gender" value="female"> মহিলা / Female</label></div>
 <div class="q">৩. আপনার প্রতিষ্ঠান কোন খাতের?<span class="en">Which sector is your workplace in?</span></div>
-<div id="q3" class="opts"></div>
+<div id="q3" class="opts"><label><input type="radio" name="q3_sector" value="rmg"> তৈরি পোশাক (গার্মেন্টস) / Garments / RMG</label><br><label><input type="radio" name="q3_sector" value="textile"> টেক্সটাইল ও বয়ন / Textile &amp; weaving</label><br><label><input type="radio" name="q3_sector" value="food"> খাদ্য ও পানীয় প্রক্রিয়াকরণ / Food &amp; beverage processing</label><br><label><input type="radio" name="q3_sector" value="heavy"> ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry</label><br><label><input type="radio" name="q3_sector" value="other"> অন্যান্য (লিখুন) / Other (specify):</label> <input type="text" name="q3_other" id="q3o" style="width:12em" disabled=""></div>
 <div class="q">৪. আপনি কোন বিভাগে কাজ করেন? (যেমন: উৎপাদন, মান নিয়ন্ত্রণ, রক্ষণাবেক্ষণ, প্যাকিং, গুদাম, প্রশাসন)<span class="en">Which department do you work in? (e.g., production, quality control, maintenance, packing, warehouse, administration)</span></div>
 <div>বিভাগ / Department: <input type="text" class="w" name="q4_team"></div>
 <div class="q">৪খ. আপনার পদবি কী? (যেমন: অপারেটর, টেকনিশিয়ান, হেল্পার, সুপারভাইজার, অফিসার, ম্যানেজার)<span class="en">What is your designation? (e.g., operator, technician, helper, supervisor, officer, manager)</span></div>
 <div>পদবি / Designation: <input type="text" class="w" name="q4b_designation"></div>
 <div class="q">৫. আপনার কাজের শিফটের ধরন কী?<span class="en">What is your shift pattern?</span></div>
-<div id="q5" class="opts"></div>
+<div id="q5" class="opts"><label><input type="radio" name="q5_shift" value="day"> শুধু দিনের শিফট / Day shift only</label><label><input type="radio" name="q5_shift" value="rotating"> ঘূর্ণায়মান শিফট / Rotating shifts</label><label><input type="radio" name="q5_shift" value="night"> শুধু রাতের শিফট / Night shift only</label></div>
 
 <h2>সেকশন ২: কাজের চাপ, নিয়ন্ত্রণ ও স্বয়ংক্রিয়তা<small>Section 2 — Job Demands, Control &amp; Automation</small></h2>
 <p>গত ৪ মাসের অভিজ্ঞতা অনুযায়ী প্রতিটি বক্তব্যের সাথে আপনি কতটা একমত?<span class="en">Thinking of the past 4 months, how much do you agree with each statement?</span></p>
 <h3>৬. কাজের চাপ, সময়ের নিয়ন্ত্রণ ও আবেগজনিত শ্রম<small>Job demands, work time control &amp; emotional labor</small></h3>
-<div id="g6" class="tw"></div>
+<div id="g6" class="tw"><table><tbody><tr><th>প্রশ্ন / Item</th><th>সম্পূর্ণ দ্বিমত<br>1 Strongly disagree</th><th>দ্বিমত<br>2 Disagree</th><th>নিরপেক্ষ<br>3 Neutral</th><th>একমত<br>4 Agree</th><th>সম্পূর্ণ একমত<br>5 Strongly agree</th></tr><tr><td>আমাকে খুব দ্রুত গতিতে কাজ করতে হয়।<span class="en">I have to work at a very fast pace.</span></td><td><input type="radio" name="q6_1" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q6_1" value="2" aria-label="Disagree"></td><td><input type="radio" name="q6_1" value="3" aria-label="Neutral"></td><td><input type="radio" name="q6_1" value="4" aria-label="Agree"></td><td><input type="radio" name="q6_1" value="5" aria-label="Strongly agree"></td></tr><tr><td>কাজের বিরতি কখন নেব তা আমি নিজে ঠিক করতে পারি।<span class="en">I can decide when to take my breaks.</span></td><td><input type="radio" name="q6_2" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q6_2" value="2" aria-label="Disagree"></td><td><input type="radio" name="q6_2" value="3" aria-label="Neutral"></td><td><input type="radio" name="q6_2" value="4" aria-label="Agree"></td><td><input type="radio" name="q6_2" value="5" aria-label="Strongly agree"></td></tr><tr><td>প্রয়োজনে আমি আমার কাজের সময়সূচি বা শিফট পরিবর্তন করতে পারি।<span class="en">When needed, I can change my work schedule or shift.</span></td><td><input type="radio" name="q6_3" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q6_3" value="2" aria-label="Disagree"></td><td><input type="radio" name="q6_3" value="3" aria-label="Neutral"></td><td><input type="radio" name="q6_3" value="4" aria-label="Agree"></td><td><input type="radio" name="q6_3" value="5" aria-label="Strongly agree"></td></tr><tr><td>কাজের সময় আমাকে নিজের প্রকৃত অনুভূতি লুকিয়ে রাখতে হয়।<span class="en">At work I have to hide my true feelings.</span></td><td><input type="radio" name="q6_4" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q6_4" value="2" aria-label="Disagree"></td><td><input type="radio" name="q6_4" value="3" aria-label="Neutral"></td><td><input type="radio" name="q6_4" value="4" aria-label="Agree"></td><td><input type="radio" name="q6_4" value="5" aria-label="Strongly agree"></td></tr></tbody></table></div>
 <h3>৭. স্বয়ংক্রিয়তা ও ডিজিটাল ব্যবস্থাপনা<small>Automation &amp; algorithmic management</small></h3>
-<div id="g7" class="tw"></div>
+<div id="g7" class="tw"><table><tbody><tr><th>প্রশ্ন / Item</th><th>সম্পূর্ণ দ্বিমত<br>1 Strongly disagree</th><th>দ্বিমত<br>2 Disagree</th><th>নিরপেক্ষ<br>3 Neutral</th><th>একমত<br>4 Agree</th><th>সম্পূর্ণ একমত<br>5 Strongly agree</th></tr><tr><td>আমার কাজের গতি মেশিন, সফটওয়্যার বা ডিজিটাল সিস্টেম দ্বারা নির্ধারিত হয়।<span class="en">My work pace is set by machines, software or a digital system.</span></td><td><input type="radio" name="q7_1" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q7_1" value="2" aria-label="Disagree"></td><td><input type="radio" name="q7_1" value="3" aria-label="Neutral"></td><td><input type="radio" name="q7_1" value="4" aria-label="Agree"></td><td><input type="radio" name="q7_1" value="5" aria-label="Strongly agree"></td></tr><tr><td>আমার কাজের পরিমাণ বা সময় ডিজিটাল ব্যবস্থায় (যেমন স্ক্যানার, ক্যামেরা, কম্পিউটার) নিয়মিত পর্যবেক্ষণ করা হয়।<span class="en">My output or time is regularly monitored by digital systems (e.g., scanners, cameras, computers).</span></td><td><input type="radio" name="q7_2" value="1" aria-label="Strongly disagree"></td><td><input type="radio" name="q7_2" value="2" aria-label="Disagree"></td><td><input type="radio" name="q7_2" value="3" aria-label="Neutral"></td><td><input type="radio" name="q7_2" value="4" aria-label="Agree"></td><td><input type="radio" name="q7_2" value="5" aria-label="Strongly agree"></td></tr></tbody></table></div>
 
 <h2>সেকশন ৩: ঘুম ও স্বাস্থ্য<small>Section 3 — Sleep &amp; Health</small></h2>
 <div class="q">৮. কর্মদিবসগুলোতে আপনি গড়ে প্রতিদিন কত ঘণ্টা ঘুমান?<span class="en">On workdays, how many hours do you sleep on average per day?</span></div>
 <div>উত্তর / Answer:
 <select class="hrs" name="q8_sleep_hours">
-<option value="">— নির্বাচন করুন —</option>
+<option value=""> নির্বাচন করুন </option>
 <option value="less_than_6">৬ ঘণ্টার কম</option>
 <option value="6_to_8">৬ থেকে ৮ ঘণ্টা</option>
 <option value="more_than_8">৮ ঘণ্টার বেশি</option>
 </select></div>
 <div class="q">৯. গত ৪ সপ্তাহে কাজ করার সময় আপনার কত ঘন ঘন অতিরিক্ত তন্দ্রাচ্ছন্নতা অনুভব হয়েছে বা জেগে থাকতে কষ্ট হয়েছে? (১ = কখনও নয়, ৫ = প্রতিদিন)<span class="en">In the past 4 weeks, how often did you feel excessively drowsy or struggle to stay awake at work? (1 = never, 5 = every day)</span></div>
-<div id="q9" class="opts scale"></div>
+<div id="q9" class="opts scale"><label><input type="radio" name="q9_drowsy" value="1"> ১</label><label><input type="radio" name="q9_drowsy" value="2"> ২</label><label><input type="radio" name="q9_drowsy" value="3"> ৩</label><label><input type="radio" name="q9_drowsy" value="4"> ৪</label><label><input type="radio" name="q9_drowsy" value="5"> ৫</label></div>
 <div class="q">১০. আপনার কি দীর্ঘমেয়াদী কোনো শারীরিক রোগ নির্ণয় করা হয়েছে? (যেমন: উচ্চ রক্তচাপ, ডায়াবেটিস, হৃদরোগ)<span class="en">Have you been diagnosed with a long-term physical illness? (e.g., hypertension, diabetes, heart disease)</span></div>
-<div id="q10" class="opts"></div>
+<div id="q10" class="opts"><label><input type="radio" name="q10_illness" value="yes"> হ্যাঁ / Yes</label><label><input type="radio" name="q10_illness" value="no"> না / No</label></div>
 
 <h2>সেকশন ৪: বিষণ্ণতা, বার্নআউট ও কর্মক্ষমতা<small>Section 4 — Depression, Burnout &amp; Work Productivity</small></h2>
 <h3>১১. বিষণ্ণতা (PHQ-9): গত ২ সপ্তাহে নিচের সমস্যাগুলো আপনাকে কত ঘন ঘন বিরক্ত করেছে?<small>Depression (PHQ-9): Over the last 2 weeks, how often have you been bothered by the following problems?</small></h3>
-<div id="g11" class="tw"></div>
+<div id="g11" class="tw"><table><tbody><tr><th>প্রশ্ন / Item</th><th>একদমই নয়<br>Not at all</th><th>বেশ কয়েক দিন<br>Several days</th><th>অর্ধেকের বেশি দিন<br>More than half</th><th>প্রায় প্রতিদিন<br>Nearly every day</th></tr><tr><td>কোনো কাজে আগ্রহ বা আনন্দ কম পাওয়া<span class="en">Little interest or pleasure in doing things</span></td><td><input type="radio" name="q11_phq1" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq1" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq1" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq1" value="3" aria-label="Nearly every day"></td></tr><tr><td>মন খারাপ, বিষণ্ণ বা হতাশ বোধ করা<span class="en">Feeling down, depressed, or hopeless</span></td><td><input type="radio" name="q11_phq2" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq2" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq2" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq2" value="3" aria-label="Nearly every day"></td></tr><tr><td>ঘুম আসতে বা ঘুম ধরে রাখতে সমস্যা, অথবা অতিরিক্ত ঘুম<span class="en">Trouble falling or staying asleep, or sleeping too much</span></td><td><input type="radio" name="q11_phq3" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq3" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq3" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq3" value="3" aria-label="Nearly every day"></td></tr><tr><td>ক্লান্ত বোধ করা বা শক্তি কম থাকা<span class="en">Feeling tired or having little energy</span></td><td><input type="radio" name="q11_phq4" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq4" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq4" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq4" value="3" aria-label="Nearly every day"></td></tr><tr><td>খিদে কমে যাওয়া বা অতিরিক্ত খাওয়া<span class="en">Poor appetite or overeating</span></td><td><input type="radio" name="q11_phq5" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq5" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq5" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq5" value="3" aria-label="Nearly every day"></td></tr><tr><td>নিজের সম্পর্কে খারাপ ধারণা — নিজেকে ব্যর্থ মনে হওয়া, অথবা নিজেকে বা পরিবারকে হতাশ করেছেন বলে মনে হওয়া<span class="en">Feeling bad about yourself — or that you are a failure or have let yourself or your family down</span></td><td><input type="radio" name="q11_phq6" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq6" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq6" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq6" value="3" aria-label="Nearly every day"></td></tr><tr><td>মনোযোগ দিতে অসুবিধা, যেমন পত্রিকা পড়া বা টিভি দেখার সময়<span class="en">Trouble concentrating on things, such as reading the newspaper or watching television</span></td><td><input type="radio" name="q11_phq7" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq7" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq7" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq7" value="3" aria-label="Nearly every day"></td></tr><tr><td>এত ধীরে নড়াচড়া বা কথা বলা যে অন্যরা খেয়াল করতে পারে; অথবা উল্টোটা — এত অস্থির বা ছটফটে থাকা যে স্বাভাবিকের চেয়ে অনেক বেশি নড়াচড়া করতে হয়<span class="en">Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual</span></td><td><input type="radio" name="q11_phq8" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq8" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq8" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq8" value="3" aria-label="Nearly every day"></td></tr><tr><td>মনে হওয়া যে আপনি মারা গেলে ভালো হতো, অথবা নিজেকে কোনোভাবে আঘাত করার চিন্তা<span class="en">Thoughts that you would be better off dead, or of hurting yourself in some way</span></td><td><input type="radio" name="q11_phq9" value="0" aria-label="Not at all"></td><td><input type="radio" name="q11_phq9" value="1" aria-label="Several days"></td><td><input type="radio" name="q11_phq9" value="2" aria-label="More than half"></td><td><input type="radio" name="q11_phq9" value="3" aria-label="Nearly every day"></td></tr></tbody></table></div>
 <h3>১২. বার্নআউট (কোপেনহেগেন বার্নআউট ইনভেন্টরি — ব্যক্তিগত বার্নআউট, ৬টি আইটেম): গত ৪ মাসে<small>Burnout (Copenhagen Burnout Inventory — personal burnout subscale, 6 items): over the past 4 months</small></h3>
-<div id="g12" class="tw"></div>
+<div id="g12" class="tw"><table><tbody><tr><th>প্রশ্ন / Item</th><th>সব সময়<br>Always</th><th>প্রায়ই<br>Often</th><th>মাঝে মাঝে<br>Sometimes</th><th>কদাচিৎ<br>Seldom</th><th>কখনও নয়<br>Never / almost never</th></tr><tr><td>আপনি কত ঘন ঘন ক্লান্তি বোধ করেন?<span class="en">How often do you feel tired?</span></td><td><input type="radio" name="q12_cbi1" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi1" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi1" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi1" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi1" value="0" aria-label="Never / almost never"></td></tr><tr><td>আপনি কত ঘন ঘন শারীরিকভাবে নিঃশেষ বোধ করেন?<span class="en">How often are you physically exhausted?</span></td><td><input type="radio" name="q12_cbi2" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi2" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi2" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi2" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi2" value="0" aria-label="Never / almost never"></td></tr><tr><td>আপনি কত ঘন ঘন মানসিকভাবে নিঃশেষ বোধ করেন?<span class="en">How often are you emotionally exhausted?</span></td><td><input type="radio" name="q12_cbi3" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi3" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi3" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi3" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi3" value="0" aria-label="Never / almost never"></td></tr><tr><td>আপনি কত ঘন ঘন ভাবেন, "আর পারছি না"?<span class="en">How often do you think: "I can't take it anymore"?</span></td><td><input type="radio" name="q12_cbi4" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi4" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi4" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi4" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi4" value="0" aria-label="Never / almost never"></td></tr><tr><td>আপনি কত ঘন ঘন নিজেকে অবসন্ন মনে করেন?<span class="en">How often do you feel worn out?</span></td><td><input type="radio" name="q12_cbi5" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi5" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi5" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi5" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi5" value="0" aria-label="Never / almost never"></td></tr><tr><td>আপনি কত ঘন ঘন নিজেকে দুর্বল এবং অসুস্থ হয়ে পড়ার ঝুঁকিতে মনে করেন?<span class="en">How often do you feel weak and susceptible to illness?</span></td><td><input type="radio" name="q12_cbi6" value="100" aria-label="Always"></td><td><input type="radio" name="q12_cbi6" value="75" aria-label="Often"></td><td><input type="radio" name="q12_cbi6" value="50" aria-label="Sometimes"></td><td><input type="radio" name="q12_cbi6" value="25" aria-label="Seldom"></td><td><input type="radio" name="q12_cbi6" value="0" aria-label="Never / almost never"></td></tr></tbody></table></div>
 <h3>১৩. কর্মক্ষমতা ও কাজের ক্ষতি (WPAI:GH, প্রশ্ন ১–৫, গত ৭ দিন)<small>Work Productivity and Activity Impairment, General Health (WPAI:GH), questions 1–5, past 7 days</small></h3>
 <div class="q">ক. গত ৭ দিনে স্বাস্থ্যসমস্যার কারণে আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন? (অসুস্থতার ছুটি, দেরিতে আসা, আগে চলে যাওয়া সহ)<span class="en">During the past 7 days, how many hours did you miss from work because of health problems?</span></div>
 <div><select class="hrs" name="q13a_missed_health">
-<option value="">— নির্বাচন করুন —</option>
+<option value=""> নির্বাচন করুন </option>
 <option value="0">০ ঘণ্টা</option>
 <option value="1_to_8">১ থেকে ৮ ঘণ্টা</option>
 <option value="more_than_8">৮ ঘণ্টার বেশি</option>
 </select></div>
 <div class="q">খ. গত ৭ দিনে অন্য কোনো কারণে (যেমন ছুটি, সরকারি ছুটি, এই গবেষণায় অংশ নেওয়া) আপনি কত ঘণ্টা কাজে অনুপস্থিত ছিলেন?<span class="en">During the past 7 days, how many hours did you miss from work for any other reason?</span></div>
 <div><select class="hrs" name="q13b_missed_other">
-<option value="">— নির্বাচন করুন —</option>
+<option value=""> নির্বাচন করুন </option>
 <option value="0">০ ঘণ্টা</option>
 <option value="1_to_8">১ থেকে ৮ ঘণ্টা</option>
 <option value="more_than_8">৮ ঘণ্টার বেশি</option>
 </select></div>
 <div class="q">গ. গত ৭ দিনে আপনি আসলে কত ঘণ্টা কাজ করেছেন?<span class="en">During the past 7 days, how many hours did you actually work?</span></div>
 <div><select class="hrs" name="q13c_hours_worked" id="q13c">
-<option value="">— নির্বাচন করুন —</option>
+<option value=""> নির্বাচন করুন </option>
 <option value="less_than_40">৪০ ঘণ্টার কম</option>
 <option value="40_to_48">৪০ থেকে ৪৮ ঘণ্টা</option>
 <option value="more_than_48">৪৮ ঘণ্টার বেশি</option>
 </select></div>
 <div class="q" id="q13dq">ঘ. গত ৭ দিনে কাজ করার সময় স্বাস্থ্যসমস্যা আপনার কাজের উৎপাদনশীলতাকে কতটা প্রভাবিত করেছে? (০ = কোনো প্রভাব পড়েনি, ১০ = কাজ করতে সম্পূর্ণ অক্ষম ছিলাম)<span class="en">During the past 7 days, how much did health problems affect your productivity while you were working? (0 = no effect, 10 = completely prevented me from working)</span></div>
-<div id="q13d" class="opts scale"></div>
+<div id="q13d" class="opts scale"><label><input type="radio" name="q13d_effect" value="0"> ০</label><label><input type="radio" name="q13d_effect" value="1"> ১</label><label><input type="radio" name="q13d_effect" value="2"> ২</label><label><input type="radio" name="q13d_effect" value="3"> ৩</label><label><input type="radio" name="q13d_effect" value="4"> ৪</label><label><input type="radio" name="q13d_effect" value="5"> ৫</label><label><input type="radio" name="q13d_effect" value="6"> ৬</label><label><input type="radio" name="q13d_effect" value="7"> ৭</label><label><input type="radio" name="q13d_effect" value="8"> ৮</label><label><input type="radio" name="q13d_effect" value="9"> ৯</label><label><input type="radio" name="q13d_effect" value="10"> ১০</label></div>
 
 <div class="help"><b>সহায়তা প্রয়োজন হলে</b>এই প্রশ্নমালার কিছু প্রশ্ন আপনাকে অস্বস্তিতে ফেলতে পারে। আপনি মানসিকভাবে কষ্টে থাকলে বা নিজেকে আঘাত করার চিন্তা আসলে কাউকে জানান। কান পেতে রই (আবেগিক সহায়তা ও আত্মহত্যা প্রতিরোধ হেল্পলাইন): ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা থেকে রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।
 <span class="en">If you feel distressed or have thoughts of harming yourself, please talk to someone. Kaan Pete Roi (emotional support helpline): 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>
@@ -150,39 +151,24 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 var ENDPOINT = "https://script.google.com/macros/s/AKfycbzJmlKHUJ1K_7nRV0auvjK4RsIsLZFEgO_mqaeOivyX06-O748QbOF8kMnpB7Q7sauIPw/exec";
 // =========================================================================
 var HELP = '<div class="help"><b>সহায়তা প্রয়োজন হলে</b>কান পেতে রই: ০৯৬১২-১১৯৯১১ (প্রতিদিন বিকাল ৩টা – রাত ৩টা)। জরুরি অবস্থায়: ৯৯৯।<span class="en">Kaan Pete Roi: 09612-119911, daily 3 pm–3 am. Emergency: 999.</span></div>';
-var YN = [["yes","হ্যাঁ / Yes"],["no","না / No"]];
-var AG = [[1,"সম্পূর্ণ দ্বিমত","Strongly disagree"],[2,"দ্বিমত","Disagree"],[3,"নিরপেক্ষ","Neutral"],[4,"একমত","Agree"],[5,"সম্পূর্ণ একমত","Strongly agree"]];
-var PH = [[0,"একদমই নয়","Not at all"],[1,"বেশ কয়েক দিন","Several days"],[2,"অর্ধেকের বেশি দিন","More than half"],[3,"প্রায় প্রতিদিন","Nearly every day"]];
-var CB = [[100,"সব সময়","Always"],[75,"প্রায়ই","Often"],[50,"মাঝে মাঝে","Sometimes"],[25,"কদাচিৎ","Seldom"],[0,"কখনও নয়","Never / almost never"]];
-var BN = "০১২৩৪৫৬৭৮৯";
-function bn(n){return String(n).replace(/\d/g,function(d){return BN[d]})}
-function rad(name,val,label){return '<label><input type="radio" name="'+name+'" value="'+val+'"> '+label+'</label>'}
-function row(name,opts){return opts.map(function(o){return '<td><input type="radio" name="'+name+'" value="'+o[0]+'" aria-label="'+o[2]+'"></td>'}).join("")}
-function grid(id,pre,head,scale,items){
-  var h='<table><tr><th>প্রশ্ন / Item</th>'+scale.map(function(s){return '<th>'+s[1]+'<br>'+(typeof s[0]=="number"&&scale.length==5&&id!="g12"?s[0]+" ":"")+s[2]+'</th>'}).join("")+'</tr>';
-  items.forEach(function(it,i){h+='<tr><td>'+it[0]+'<span class="en">'+it[1]+'</span></td>'+row(pre+(i+1),scale)+'</tr>'});
-  document.getElementById(id).innerHTML=h+'</table>';
-}
 function $(i){return document.getElementById(i)}
-$("elig").innerHTML='<div class="q">ক. আপনি কি বর্তমানে কোনো কারখানা বা শিল্পপ্রতিষ্ঠানে বেতন বা মজুরির বিনিময়ে কাজ করেন?<span class="en">A. Do you currently work for pay in a factory or industrial workplace?</span></div><div class="opts">'+YN.map(function(o){return rad("eligible",o[0],o[1])}).join("")+'</div><p class="en">উত্তর "না" হলে জরিপ এখানেই শেষ। / If "No", the survey ends here.</p>';
-$("consent").innerHTML='<div class="q">খ. আগামী ১২ মাসে প্রতি ৪ মাস অন্তর একই জরিপে (মোট ৩টি ধাপ) অংশ নিতে আপনি কি সম্মত?<span class="en">B. Do you agree to take part in the same survey every 4 months over the next 12 months (3 waves in total)?</span></div><div class="opts">'+YN.map(function(o){return rad("consent_followup",o[0],o[1])}).join("")+'</div>';
-$("q3").innerHTML=[["rmg","তৈরি পোশাক (গার্মেন্টস) / Garments / RMG"],["textile","টেক্সটাইল ও বয়ন / Textile & weaving"],["food","খাদ্য ও পানীয় প্রক্রিয়াকরণ / Food & beverage processing"],["heavy","ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry"]].map(function(o){return rad("q3_sector",o[0],o[1])+"<br>"}).join("")+rad("q3_sector","other","অন্যান্য (লিখুন) / Other (specify):")+' <input type="text" name="q3_other" id="q3o" style="width:12em">';
-$("q5").innerHTML=[["day","শুধু দিনের শিফট / Day shift only"],["rotating","ঘূর্ণায়মান শিফট / Rotating shifts"],["night","শুধু রাতের শিফট / Night shift only"]].map(function(o){return rad("q5_shift",o[0],o[1])}).join("");
-grid("g6","q6_",0,AG,[["আমাকে খুব দ্রুত গতিতে কাজ করতে হয়।","I have to work at a very fast pace."],["কাজের বিরতি কখন নেব তা আমি নিজে ঠিক করতে পারি।","I can decide when to take my breaks."],["প্রয়োজনে আমি আমার কাজের সময়সূচি বা শিফট পরিবর্তন করতে পারি।","When needed, I can change my work schedule or shift."],["কাজের সময় আমাকে নিজের প্রকৃত অনুভূতি লুকিয়ে রাখতে হয়।","At work I have to hide my true feelings."]]);
-grid("g7","q7_",0,AG,[["আমার কাজের গতি মেশিন, সফটওয়্যার বা ডিজিটাল সিস্টেম দ্বারা নির্ধারিত হয়।","My work pace is set by machines, software or a digital system."],["আমার কাজের পরিমাণ বা সময় ডিজিটাল ব্যবস্থায় (যেমন স্ক্যানার, ক্যামেরা, কম্পিউটার) নিয়মিত পর্যবেক্ষণ করা হয়।","My output or time is regularly monitored by digital systems (e.g., scanners, cameras, computers)."]]);
-$("q9").innerHTML=[1,2,3,4,5].map(function(n){return rad("q9_drowsy",n,bn(n))}).join("");
-$("q10").innerHTML=YN.map(function(o){return rad("q10_illness",o[0],o[1])}).join("");
-grid("g11","q11_phq",0,PH,[["কোনো কাজে আগ্রহ বা আনন্দ কম পাওয়া","Little interest or pleasure in doing things"],["মন খারাপ, বিষণ্ণ বা হতাশ বোধ করা","Feeling down, depressed, or hopeless"],["ঘুম আসতে বা ঘুম ধরে রাখতে সমস্যা, অথবা অতিরিক্ত ঘুম","Trouble falling or staying asleep, or sleeping too much"],["ক্লান্ত বোধ করা বা শক্তি কম থাকা","Feeling tired or having little energy"],["খিদে কমে যাওয়া বা অতিরিক্ত খাওয়া","Poor appetite or overeating"],["নিজের সম্পর্কে খারাপ ধারণা — নিজেকে ব্যর্থ মনে হওয়া, অথবা নিজেকে বা পরিবারকে হতাশ করেছেন বলে মনে হওয়া","Feeling bad about yourself — or that you are a failure or have let yourself or your family down"],["মনোযোগ দিতে অসুবিধা, যেমন পত্রিকা পড়া বা টিভি দেখার সময়","Trouble concentrating on things, such as reading the newspaper or watching television"],["এত ধীরে নড়াচড়া বা কথা বলা যে অন্যরা খেয়াল করতে পারে; অথবা উল্টোটা — এত অস্থির বা ছটফটে থাকা যে স্বাভাবিকের চেয়ে অনেক বেশি নড়াচড়া করতে হয়","Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual"],["মনে হওয়া যে আপনি মারা গেলে ভালো হতো, অথবা নিজেকে কোনোভাবে আঘাত করার চিন্তা","Thoughts that you would be better off dead, or of hurting yourself in some way"]]);
-grid("g12","q12_cbi",0,CB,[["আপনি কত ঘন ঘন ক্লান্তি বোধ করেন?","How often do you feel tired?"],["আপনি কত ঘন ঘন শারীরিকভাবে নিঃশেষ বোধ করেন?","How often are you physically exhausted?"],["আপনি কত ঘন ঘন মানসিকভাবে নিঃশেষ বোধ করেন?","How often are you emotionally exhausted?"],["আপনি কত ঘন ঘন ভাবেন, \"আর পারছি না\"?","How often do you think: \"I can't take it anymore\"?"],["আপনি কত ঘন ঘন নিজেকে অবসন্ন মনে করেন?","How often do you feel worn out?"],["আপনি কত ঘন ঘন নিজেকে দুর্বল এবং অসুস্থ হয়ে পড়ার ঝুঁকিতে মনে করেন?","How often do you feel weak and susceptible to illness?"]]);
-$("q13d").innerHTML=[0,1,2,3,4,5,6,7,8,9,10].map(function(n){return rad("q13d_effect",n,bn(n))}).join("");
+// support for older phones
+if(!Element.prototype.closest){Element.prototype.closest=function(s){var e=this,m=Element.prototype.matches||Element.prototype.msMatchesSelector||Element.prototype.webkitMatchesSelector;while(e&&e.nodeType==1){if(m.call(e,s))return e;e=e.parentElement}return null}}
+function qs(k){
+  try{
+    var a=location.search.replace(/^\?/,"").split("&"),i,p;
+    for(i=0;i<a.length;i++){p=a[i].split("=");if(decodeURIComponent(p[0])==k)return decodeURIComponent((p[1]||"").replace(/\+/g," "))}
+  }catch(x){}
+  return "";
+}
 
 // Researcher-only fields from the link: ?wave=T1&factory=F03&pid=P001&date=27/10/2026
-var P=new URLSearchParams(location.search), w=(P.get("wave")||"").toUpperCase();
-$("wave").innerHTML=["T1","T2","T3"].map(function(t){return '<label style="margin-right:14px"><input type="radio" name="wave" value="'+t+'"'+(w?' disabled':'')+(w==t?' checked':'')+'> '+t+'</label>'}).join("");
+var w=(qs("wave")||"").toUpperCase(), wv=document.getElementsByName("wave"), i0;
+for(i0=0;i0<wv.length;i0++){if(w)wv[i0].disabled=true;if(wv[i0].value==w)wv[i0].checked=true}
 var d=new Date(), pad=function(n){return ("0"+n).slice(-2)};
-$("date").value=P.get("date")||(pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear());
-if(P.get("pid")){$("pid").value=P.get("pid");$("pid").readOnly=true}
-if(P.get("factory")){$("factory").value=P.get("factory");$("factory").readOnly=true}
+$("date").value=qs("date")||(pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear());
+if(qs("pid")){$("pid").value=qs("pid");$("pid").readOnly=true}
+if(qs("factory")){$("factory").value=qs("factory");$("factory").readOnly=true}
 
 var f=$("f"), rest=$("rest");
 function val(n){var e=f.querySelector('input[name="'+n+'"]:checked');return e?e.value:""}
@@ -240,8 +226,13 @@ f.addEventListener("submit",function(e){
   }
   $("err").textContent="";
   var o={wave:val("wave")||w,date:$("date").value,factory:$("factory").value,pid:$("pid").value.trim(),eligible:"yes"};
-  var fd=new FormData(f);
-  fd.forEach(function(v,k){if(["wave","date","factory","pid","eligible"].indexOf(k)<0)o[k]=v});
+  var skip={wave:1,date:1,factory:1,pid:1,eligible:1}, els=f.elements, i, x;
+  for(i=0;i<els.length;i++){
+    x=els[i];
+    if(!x.name||x.disabled||skip[x.name]||x.type=="button"||x.type=="submit")continue;
+    if(x.type=="radio"&&!x.checked)continue;
+    o[x.name]=x.value;
+  }
   if(o.q3_sector!="other")o.q3_other="";
   send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p>"+HELP)});
 });
