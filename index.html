@@ -18,7 +18,8 @@ h3{font-size:1rem;font-weight:400;color:var(--navy);margin:18px 0 4px}
 .q{margin:16px 0 6px;font-weight:600}
 .q .en{font-weight:400}
 .box{border:0;background:var(--soft);padding:8px 12px;margin:14px 0}
-.box legend{font-weight:700;font-style:italic;padding:0 6px;background:var(--paper)}
+.box legend{font-weight:700;font-style:italic;padding:0;float:left;width:100%;margin:0 0 8px}
+.box legend+*{clear:both}
 .opts label{display:inline-flex;align-items:center;gap:6px;margin:4px 16px 4px 0;cursor:pointer}
 input[type=radio]{appearance:none;-webkit-appearance:none;width:17px;height:17px;border:1px solid var(--ink);border-radius:0;margin:0;display:inline-grid;place-content:center;background:#fff;flex:none;cursor:pointer}
 input[type=radio]:checked::after{content:"✓";font-size:14px;line-height:1;font-weight:700}
@@ -55,7 +56,7 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 <body>
 <form id="f" novalidate>
 <h1>কর্মজীবী শিল্পশ্রমিকদের ঘুম, স্বাস্থ্য ও কর্মক্ষমতা বিষয়ক জরিপ প্রশ্নমালা<small>Survey Questionnaire: Sleep, Health &amp; Work Performance among Industrial Workers</small></h1>
-<p style="margin-top:14px">নির্দেশনা: অনুগ্রহ করে প্রযোজ্য উত্তরে টিক (✓) চিহ্ন প্রদান করুন অথবা নির্ধারিত স্থানে উত্তর লিপিবদ্ধ করুন। আপনার প্রদত্ত সকল তথ্য কঠোরভাবে গোপন রাখা হবে, কেবল গবেষণার উদ্দেশ্যে ব্যবহৃত হবে এবং কোনো তৃতীয় পক্ষের নিকট প্রকাশ বা তাদের প্রবেশাধিকার প্রদান করা হবে না।
+<p style="margin-top:14px">নির্দেশনা: প্রযোজ্য উত্তরে টিক (✓) দিন অথবা নির্ধারিত স্থানে লিখুন। আপনার সকল তথ্য গোপন রাখা হবে, শুধু গবেষণার কাজে ব্যবহৃত হবে এবং কোনো তৃতীয় পক্ষকে দেওয়া হবে না।
 <span class="en">Please tick (✓) the applicable answer or write in the space provided. Your information will be kept strictly confidential.</span></p>
 
 <fieldset class="box"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
@@ -75,15 +76,25 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 <div class="q">১. আপনার বর্তমান বয়স কত?<span class="en">What is your current age?</span></div>
 <div>উত্তর / Answer: <input type="number" class="w" style="max-width:6em" name="q1_age" min="14" max="90" inputmode="numeric"> বছর</div>
 <div class="q">২. আপনার লিঙ্গ পরিচয় কী?<span class="en">What is your gender identity?</span></div>
-<div class="opts"><label><input type="radio" name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" name="q2_gender" value="female"> মহিলা / Female</label></div>
+<div class="opts"><label><input type="radio" name="q2_gender" value="male"> পুরুষ / Male</label><label><input type="radio" name="q2_gender" value="female"> মহিলা / Female</label><label><input type="radio" name="q2_gender" value="not_stated"> বলতে ইচ্ছুক নই / Prefer not to say</label></div>
 <div class="q">৩. আপনার প্রতিষ্ঠান কোন খাতের?<span class="en">Which sector is your workplace in?</span></div>
-<div id="q3" class="opts"><label><input type="radio" name="q3_sector" value="rmg"> তৈরি পোশাক (গার্মেন্টস) / Garments / RMG</label><br><label><input type="radio" name="q3_sector" value="textile"> টেক্সটাইল ও বয়ন / Textile &amp; weaving</label><br><label><input type="radio" name="q3_sector" value="food"> খাদ্য ও পানীয় প্রক্রিয়াকরণ / Food &amp; beverage processing</label><br><label><input type="radio" name="q3_sector" value="heavy"> ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry</label><br><label><input type="radio" name="q3_sector" value="other"> অন্যান্য (লিখুন) / Other (specify):</label> <input type="text" name="q3_other" id="q3o" style="width:12em" disabled=""></div>
-<div class="q">৪. আপনি কোন বিভাগে কাজ করেন? (যেমন: উৎপাদন, মান নিয়ন্ত্রণ, রক্ষণাবেক্ষণ, প্যাকিং, গুদাম, প্রশাসন)<span class="en">Which department do you work in? (e.g., production, quality control, maintenance, packing, warehouse, administration)</span></div>
+<div id="q3" class="opts"><label><input type="radio" name="q3_sector" value="rmg"> তৈরি পোশাক (গার্মেন্টস) / Garments / RMG</label><br><label><input type="radio" name="q3_sector" value="textile"> টেক্সটাইল ও বয়ন / Textile &amp; weaving</label><br><label><input type="radio" name="q3_sector" value="mechanical_auto"> মেকানিক্যাল ও অটোমোবাইল / Mechanical &amp; automobile</label><br><label><input type="radio" name="q3_sector" value="heavy"> ইলেকট্রনিক্স / ধাতু / ভারী শিল্প / Electronics / metal / heavy industry</label><br><label><input type="radio" name="q3_sector" value="other"> অন্যান্য (লিখুন) / Other (specify):</label> <input type="text" name="q3_other" id="q3o" style="width:12em" disabled=""></div>
+<div class="q">৪ক. আপনি কোন বিভাগে কাজ করেন? (যেমন: উৎপাদন, মান নিয়ন্ত্রণ, রক্ষণাবেক্ষণ, প্যাকিং, গুদাম, প্রশাসন)<span class="en">Which department do you work in? (e.g., production, quality control, maintenance, packing, warehouse, administration)</span></div>
 <div>বিভাগ / Department: <input type="text" class="w" name="q4_team"></div>
-<div class="q">৪খ. আপনার পদবি কী? (যেমন: অপারেটর, টেকনিশিয়ান, হেল্পার, সুপারভাইজার, অফিসার, ম্যানেজার)<span class="en">What is your designation? (e.g., operator, technician, helper, supervisor, officer, manager)</span></div>
+<div class="q">৪খ. আপনার পদবি কী? (যেমন: হেল্পার, অপারেটর, টেকনিশিয়ান, সুপারভাইজার, অফিসার, এক্সিকিউটিভ, ম্যানেজার)<span class="en">What is your designation? (e.g., helper, operator, technician, supervisor, officer, executive, manager)</span></div>
 <div>পদবি / Designation: <input type="text" class="w" name="q4b_designation"></div>
 <div class="q">৫. আপনার কাজের শিফটের ধরন কী?<span class="en">What is your shift pattern?</span></div>
 <div id="q5" class="opts"><label><input type="radio" name="q5_shift" value="day"> শুধু দিনের শিফট / Day shift only</label><label><input type="radio" name="q5_shift" value="rotating"> ঘূর্ণায়মান শিফট / Rotating shifts</label><label><input type="radio" name="q5_shift" value="night"> শুধু রাতের শিফট / Night shift only</label></div>
+<div class="q">৫ক. আপনি সাধারণত দিনে গড়ে কত ঘণ্টা কাজ করেন? (ওভারটাইম সহ)<span class="en">On average, how many hours do you work per day? (including overtime)</span></div>
+<div>উত্তর / Answer:
+<select class="hrs" name="q5a_hours">
+<option value=""> নির্বাচন করুন </option>
+<option value="less_than_8">৮ ঘণ্টার কম</option>
+<option value="8_to_10">৮ থেকে ১০ ঘণ্টা</option>
+<option value="more_than_10">১০ ঘণ্টার বেশি</option>
+</select></div>
+<div class="q">৫খ. সপ্তাহে আপনার সাধারণত কতদিন সাপ্তাহিক ছুটি থাকে?<span class="en">How many weekly off days do you usually have?</span></div>
+<div id="q5b" class="opts"><label><input type="radio" name="q5b_offdays" value="0"> ০ দিন / 0 days</label><label><input type="radio" name="q5b_offdays" value="1"> ১ দিন / 1 day</label><label><input type="radio" name="q5b_offdays" value="2"> ২ দিন / 2 days</label><label><input type="radio" name="q5b_offdays" value="3_plus"> ৩ বা তার বেশি / 3 or more</label><label><input type="radio" name="q5b_offdays" value="irregular"> অনিয়মিত / ভিন্ন ভিন্ন / Irregular / varies</label></div>
 
 <h2>সেকশন ২: কাজের চাপ, নিয়ন্ত্রণ ও স্বয়ংক্রিয়তা<small>Section 2 — Job Demands, Control &amp; Automation</small></h2>
 <p>গত ৪ মাসের অভিজ্ঞতা অনুযায়ী প্রতিটি বক্তব্যের সাথে আপনি কতটা একমত?<span class="en">Thinking of the past 4 months, how much do you agree with each statement?</span></p>
@@ -195,7 +206,7 @@ function isEmpty(n){
   return !x.value.trim();
 }
 function allFields(){
-  var a=["pid","consent_followup","q1_age","q2_gender","q3_sector","q4_team","q4b_designation","q5_shift"],i;
+  var a=["pid","consent_followup","q1_age","q2_gender","q3_sector","q4_team","q4b_designation","q5_shift","q5a_hours","q5b_offdays"],i;
   if(val("q3_sector")=="other")a.push("q3_other");
   for(i=1;i<=4;i++)a.push("q6_"+i);
   for(i=1;i<=2;i++)a.push("q7_"+i);
