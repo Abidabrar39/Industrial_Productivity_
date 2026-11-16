@@ -43,6 +43,11 @@ button{font:inherit;font-weight:700;padding:12px 28px;background:var(--navy);col
 button:disabled{opacity:.5}
 .msg h2{margin-top:0}
 .hide{display:none}
+.box.rs{background:#DEEBF7;border:2px dashed #2E75B6;padding:10px 14px;pointer-events:none;-webkit-user-select:none;user-select:none}
+.box.rs legend{color:#1F4E79}
+.box.rs input[type=text]{border-bottom-color:#2E75B6;color:#333}
+.box.rs input[readonly]{cursor:not-allowed;pointer-events:none}
+.box.rs input[type=radio]:disabled{background:#BDD7EE;border-color:#1F4E79;pointer-events:none}
 @media print{body{background:#fff}form{border:0}button{display:none}}
 @media(max-width:600px){form,.msg{margin:0;padding:18px 14px;border:0}}
 div.bad{background:#fde8e8;border-left:4px solid #c00;padding-left:8px}
@@ -59,9 +64,9 @@ input.bad{background:#fde8e8;border-bottom-color:#c00}
 <p style="margin-top:14px">নির্দেশনা: প্রযোজ্য উত্তরে টিক (✓) দিন অথবা নির্ধারিত স্থানে লিখুন। আপনার সকল তথ্য গোপন রাখা হবে, শুধু গবেষণার কাজে ব্যবহৃত হবে এবং কোনো তৃতীয় পক্ষকে দেওয়া হবে না।
 <span class="en">Please tick (✓) the applicable answer or write in the space provided. Your information will be kept strictly confidential.</span></p>
 
-<fieldset class="box"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
+<fieldset class="box rs" tabindex="-1"><legend>গবেষকের ব্যবহারের জন্য (উত্তরদাতা পূরণ করবেন না) / For researcher use only</legend>
 <div class="opts"><b>জরিপের ধাপ / Wave:</b> <span id="wave"><label style="margin-right:14px"><input type="radio" name="wave" value="T1"> T1</label><label style="margin-right:14px"><input type="radio" name="wave" value="T2"> T2</label><label style="margin-right:14px"><input type="radio" name="wave" value="T3"> T3</label></span></div>
-<div style="margin-top:8px"><b>তারিখ / Date:</b> <input type="text" id="date" name="date" readonly style="width:9em"> <span class="en" style="display:inline">(DD/MM/YYYY)</span>
+<div style="margin-top:8px"><b>তারিখ / Date:</b> <input type="text" id="date" name="date" style="width:9em"> <span class="en" style="display:inline">(DD/MM/YYYY)</span>
 &nbsp; <b>কারখানার কোড / Factory code:</b> <input type="text" id="factory" name="factory" style="width:7em">
 &nbsp; <b>অংশগ্রহণকারী আইডি / Participant ID:</b> <input type="text" id="pid" name="pid" style="width:7em"> <span class="en" style="display:inline">(researcher assigns at T1, reused at T2 and T3)</span></div></fieldset>
 
@@ -176,10 +181,22 @@ function qs(k){
 // Researcher-only fields from the link: ?wave=T1&factory=F03&pid=P001&date=27/10/2026
 var w=(qs("wave")||"").toUpperCase(), wv=document.getElementsByName("wave"), i0;
 for(i0=0;i0<wv.length;i0++){if(w)wv[i0].disabled=true;if(wv[i0].value==w)wv[i0].checked=true}
-var d=new Date(), pad=function(n){return ("0"+n).slice(-2)};
-$("date").value=qs("date")||(pad(d.getDate())+"/"+pad(d.getMonth()+1)+"/"+d.getFullYear());
+if(qs("date"))$("date").value=qs("date");
+function makePid(){
+  var c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",s="",a=[],i; // no 0/O/1/I to avoid mix-ups
+  try{a=new Uint8Array(6);crypto.getRandomValues(a)}catch(x){a=[];for(i=0;i<6;i++)a.push(Math.floor(Math.random()*256))}
+  for(i=0;i<6;i++)s+=c.charAt(a[i]%c.length);
+  return "P-"+s;
+}
 if(qs("pid")){$("pid").value=qs("pid");$("pid").readOnly=true}
+else if(w!="T2"&&w!="T3"){$("pid").value=makePid();$("pid").readOnly=true}
 if(qs("factory")){$("factory").value=qs("factory");$("factory").readOnly=true}
+// lock the whole researcher box and keep keyboard Tab out of it
+var rs=document.querySelectorAll(".rs input");
+for(i0=0;i0<rs.length;i0++){
+  rs[i0].tabIndex=-1;
+  if(rs[i0].type=="radio")rs[i0].disabled=true; else rs[i0].readOnly=true;
+}
 
 var f=$("f"), rest=$("rest");
 function val(n){var e=f.querySelector('input[name="'+n+'"]:checked');return e?e.value:""}
@@ -245,7 +262,7 @@ f.addEventListener("submit",function(e){
     o[x.name]=x.value;
   }
   if(o.q3_sector!="other")o.q3_other="";
-  send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p>"+HELP)});
+  send(o,function(){finish("<h2>ধন্যবাদ / Thank you</h2><p>আপনার উত্তর জমা হয়েছে।<span class='en'>Your response has been submitted.</span></p><p>অংশগ্রহণকারী আইডি / Participant ID: <b>"+o.pid+"</b></p>"+HELP)});
 });
 function send(o,ok){
   var b=$("btn");b.disabled=true;
